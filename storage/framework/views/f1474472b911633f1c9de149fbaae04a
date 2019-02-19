@@ -1,0 +1,10 @@
+<?php $__env->startSection('container'); ?>
+
+    <div class="row cl">
+        <div class="col-12">
+            <h1 class="text-c" style="font-size:60px;">开发中</h1>
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.tree', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

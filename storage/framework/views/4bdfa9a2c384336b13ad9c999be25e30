@@ -1,0 +1,106 @@
+<?php $__env->startSection('container'); ?>
+<div>
+    <form id="search_form" data="pro_id,type,name,tel" method="get" data-url="<?php echo e(url('manage/admin')); ?>">
+        建设项目
+        <span class="select-box" style="width:auto;">
+            <select name="pro_id" id="pro_id" class="select">
+                <?php if(isset($project)): ?>
+                <?php foreach($project as $k=>$v): ?>
+                <option value="<?php echo e($v['id']); ?>" <?php if(isset($search['pro_id']) && $search['pro_id'] == $v['id']): ?> selected <?php endif; ?>><?php echo e($v['name']); ?></option>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+        </span>
+        <span class="select-box" style="width:auto;">
+            <select name="role" id="role" class="select">
+                <option value="">用户角色</option>
+                <?php if(isset($roles)): ?>
+                <?php foreach($roles as $k=>$v): ?>
+                <option value="<?php echo e($v['id']); ?>" <?php if(isset($search['role']) && $search['role'] == $v['id']): ?> selected <?php endif; ?>><?php echo e($v['display_name']); ?></option>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+        </span>
+        <input type="text" name="name" id="name" placeholder="请输入姓名" class="input-text search-input" value="<?php if(isset($search['name']) && $search['name']): ?><?php echo e($search['name']); ?><?php endif; ?>">
+        <input type="text" name="tel" id="tel" placeholder="请输入联系方式" class="input-text search-input" value="<?php if(isset($search['tel']) && $search['tel']): ?><?php echo e($search['tel']); ?><?php endif; ?>">
+        <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont"></i> 搜索</button>
+    </form>
+</div>
+<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+	<span class="l">
+		<a class="btn btn-primary radius open-iframe"  data-url="<?php echo e(url('manage/addUser')); ?>" data-title="添加用户" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>添加用户</a>
+	</span>
+</div>
+<div class="mt-10 dataTables_wrapper">
+    <table id="table_list" class="table table-border table-bordered table-bg table-sort">
+        <thead>
+            <tr class="text-c">
+                <th width="60">序号</th>
+                <th width="100" class="hidden-xs">单位名称</th>
+                <th width="60" class="hidden-xs">职位名称</th>
+                <th width="60" class="hidden-xs">姓名</th>
+                <th width="60">登录名</th>
+                <th width="60">角色</th>
+                <th width="60" class="hidden-xs">审核权限</th>
+                <th width="60" class="hidden-xs">状态</th>
+                <th width="100">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($data): ?>
+            <?php foreach($data as $value): ?>
+            <tr class="text-c" id="list-<?php echo e($value['id']); ?>">
+                <td><?php echo e($page_num++); ?></td>
+                <td class="hidden-xs"><?php echo e($value['company_name']); ?></td>
+                <td class="hidden-xs"><?php echo e($value['position_name']); ?></td>
+                <td class="hidden-xs"><?php echo e($value['name']); ?></td>
+                <td><?php echo e($value['username']); ?></td>
+                <td>
+                    <?php echo e($value['display_name']); ?>
+
+                </td>
+                <td class="hidden-xs td-status"><span class="label <?php if($value['has_sh'] == 1): ?> label-success <?php else: ?> label-danger <?php endif; ?> radius"><?php echo e($has_sh[$value['has_sh']]); ?></span></td>
+                <td class="hidden-xs"><span class="label <?php if($value['status'] == 1): ?> label-success <?php else: ?> label-danger <?php endif; ?> radius"><?php echo e($status[$value['status']]); ?></span></td>
+                <td class="f-14 product-brand-manage td-manage">
+                    <?php if($user_is_act): ?>
+                    <a style="text-decoration:none" data-for="admin" data-url="<?php echo e(url('manage/admin/'.$value['id'].'/edit')); ?>" class="mt-5 edit-r btn btn-secondary radius size-MINI" href="javascript:;" data-type="edit" data-title="修改操作员" title="修改"><i class="Hui-iconfont">&#xe6df;</i></a> 
+                    <a style="text-decoration:none" class="mt-5 ml-5 ml-5 del-r btn btn-danger radius size-MINI" href="javascript:;" data-id="<?php echo e($value['id']); ?>" data-url="<?php echo e(url('manage/admin/'.$value['id'])); ?>" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                    <a style="text-decoration:none" data-for="admin" data-url="<?php echo e(url('manage/admin/'.$value['id'].'/edit')); ?>" class="mt-5 ml-5 edit-r btn btn-success radius size-MINI" href="javascript:;" data-type="pass" data-title="修改操作员密码" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a> 
+                    <a style="text-decoration:none" data-for="admin" data-url="<?php echo e(url('manage/admin/'.$value['id'])); ?>" class="mt-5 ml-5 status-r btn btn-success radius size-MINI" href="javascript:;" data-type="has_sh" data-title="禁止审核权限,开放审核权限" data-span="没有,有" data-status="<?php echo e($value['has_sh']); ?>" <?php if($value['has_sh']==1): ?> title="禁止审核权限"><i class="Hui-iconfont">&#xe631;</i><?php else: ?> title="开放审核权限"><i class="Hui-iconfont">&#xe615;</i> <?php endif; ?></a>
+                    <a style="text-decoration:none" class="mt-5 ml-5 open-iframe btn btn-success radius size-MINI" href="javascript:;" data-title="设置权限" data-url="<?php echo e(url('manage/user_mod?u_id='.$value['id'])); ?>" title="子系统权限">权限</a>
+                    <?php endif; ?>
+                    <a style="text-decoration:none" class="mt-5 ml-5 open-iframe btn btn-success radius size-MINI" href="javascript:;" data-is-reload="1" data-title="审核用户" data-url="<?php echo e(url('manage/user_info?u_id='.$value['id'])); ?>" title="审核用户">审核</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+    <?php if($last_page > 1): ?>
+    <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php endif; ?>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('layer'); ?>
+<?php echo $__env->make('admin.admin.admin_edit', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/common.js"></script>
+<script type="text/javascript" src="/static/admin/js/password.js"></script>
+<script type="text/javascript">
+/*$('#pro_id').select2().val(<?php echo e($search['pro_id']); ?>);*/
+
+list.init();
+
+$('.skin-minimal input').iCheck({
+    checkboxClass: 'icheckbox-blue',
+    radioClass: 'iradio-blue',
+    increaseArea: '20%'
+});
+new PasswordStrength('password', 'passStrength');
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

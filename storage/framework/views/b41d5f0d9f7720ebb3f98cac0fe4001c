@@ -1,0 +1,618 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>实时预览Demo</title>
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/PlayViewDemo.css"/>
+    <script type="text/javascript" src="/lib/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript" src="/static/admin/js/PlayViewDemo.js"></script>
+
+    <!-- 以下是事件触发函数接口 -->
+
+    <script language="javascript" for="PreviewOcx" event="FireSetPreset(iNumber)">
+        szMsg = "设置预置点" + iNumber;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireGotoPreset(iNumber)">
+        szMsg = "调用预置点" + iNumber;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireSelectInfo(iSel)">
+        szMsg = "监控点信息显示,窗口" + iSel;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireSelectStopInfo(iSel)">
+        szMsg = "关闭监控点信息显示,窗口" + iSel;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireSelectWindow(iSel)">
+        szMsg = "窗口选择消息,窗口" + iSel;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStartRealPlay(iSel)">
+        szMsg = "开始预览消息" + iSel;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStopRealPlay(iSel)">
+        szMsg = "停止预览消息" + iSel ;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStopPreviewAll(iSel)">
+        szMsg = "停止所有预览消息" ;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FirePTZCtrl(iWindowID,iCtrlID,iSpeed)">
+        szMsg = "云台控制消息:"+ "窗口:" +iWindowID+"控制:"+iCtrlID+"速度:"+ iSpeed;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStartRecord(iWindowID)">
+        szMsg = "开始录像"+ iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStopRecord(iWindowID)">
+        szMsg = "停止录像"+ iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireCapturePic(szPath,iWindowID)">
+        szMsg = "抓图"+ "路径" +szPath+"窗口"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireInstCapturePic(szPath,iWindowID,iCounts,iSpanTimes)">
+        szMsg = "连续抓图"+ "路径:" +szPath+" # 窗口"+iWindowID+" # 连抓张数:"+iCounts+" # 时间间隔:"+iSpanTimes+"ms";
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStartSound(iWindowID)">
+        szMsg = "打开声音 "+ "窗口:"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStopSound(iWindowID)">
+        szMsg = "关闭声音 "+ "窗口:"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStartZoom(iWindowID)">
+        szMsg = "打开电子放大 "+ "窗口:"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStopZoom(iWindowID)">
+        szMsg = "关闭电子放大 "+ "窗口:"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStartTalk(iWindowID)">
+        szMsg = "打开对讲 "+ "窗口:"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireStopTalk(iWindowID)">
+        szMsg = "关闭对讲 "+ "窗口:"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireSubStream(iWindowID)">
+        szMsg = "切换成子码流 "+ "窗口:"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireMainStream(iWindowID)">
+        szMsg = "切换成主码流 "+ "窗口:"+iWindowID;
+        document.getElementById("MsgInfo").value=szMsg;
+    </script>
+
+    <script language="javascript" for="PreviewOcx" event="FireLoadPreviewDataResult(lResult)">
+        // 加载数据结果
+        if (0 == lResult)
+        {
+            alert("加载数据成功！")
+        }
+        else if(-1 == lResult)
+        {
+            alert("加载数据失败！")
+        }
+    </script>
+
+</head>
+<body onLoad="init();">
+<div style="text-align:left;font-size:14px">PSD 网页控件</div>
+<div style="text-align:left;background-color: #C0C0C0;width:1230px">登录信息</div>
+<div style="padding: 1px; margin: 1px;">
+    IP:&nbsp;<input id="TextIP" type="text" value="222.90.232.86" />&nbsp;&nbsp;&nbsp;
+    port:&nbsp;<input id="TextPort" type="text" value="8081" />&nbsp;&nbsp;
+    user:&nbsp;<input id="TextName" type="text" value="admin" />&nbsp;&nbsp;&nbsp;
+    pwd:&nbsp;<input id="TextPwd" type="password" value="Hxtm12345+" />&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;<input type="button" value="登录" onClick="loginCMS();"/>
+    &nbsp;&nbsp;&nbsp;<input type="button" value="异步登录" onClick="loginCMSEx();"/>
+    &nbsp;&nbsp;&nbsp;<input type="button" value="退出" onclick="logoutCMS();" />
+    &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="设置码流类型" onClick="SetTreamType();"/>
+    <select id="StreamTypeId" name="StreamName">
+        <option value = "0">默认码流</option>
+        <option value = "1">主码流</option>
+        <option value = "2">子码流</option>
+    </select>
+</div>
+
+<div style="text-align:left;background-color: #C0C0C0;width:1230px" >&nbsp;</div>
+<div style="width:1230px">
+    <input id="Hidden1" type="hidden" />
+    <div style="width:250px;float:left;overflow:hidden">
+        &nbsp;<br />
+        <table width="100%" style="border: thin solid #C0C0C0" >
+            <tr>
+                <td width="50%" align="center"><input type="button" value="开始预览" onClick="StartPlayView()" /></td>
+                <td width="50%" align="center"><input id="TextCameraId"  size="7" type="text" /></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td align="center"><input type="button" value="指定预览" onClick="StartPlayView_InWnd()" /></td>
+                <td align="center">
+                    <select id="SelectWnd" name="D2">
+                        <option value = "0">1</option>
+                        <option value = "1">2</option>
+                        <option value = "2">3</option>
+                        <option value = "3">4</option>
+                        <option value = "4">5</option>
+                        <option value = "5">6</option>
+                        <option value = "6">7</option>
+                        <option value = "7">8</option>
+                        <option value = "8">9</option>
+                        <option value = "9">10</option>
+                        <option value = "10">11</option>
+                        <option value = "11">12</option>
+                        <option value = "12">13</option>
+                        <option value = "13">14</option>
+                        <option value = "14">15</option>
+                        <option value = "15">16</option>
+                        <option value = "16">17</option>
+                        <option value = "17">18</option>
+                        <option value = "18">19</option>
+                        <option value = "19">20</option>
+                        <option value = "20">21</option>
+                        <option value = "21">22</option>
+                        <option value = "22">23</option>
+                        <option value = "23">24</option>
+                        <option value = "24">25</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td width="50%" align="center"><input type="button" value="空闲预览" onClick="StartPlayView_Free()" /></td>
+                <td width="50%" align="center"><input type="button" value="停止预览" onclick = "StopPlayView()" /></td>
+            </tr>
+            <tr>
+                <td width="50%" align="center"><input type="button" value="指定停止" onClick="StopPreviewInWnd();" /></td>
+                <td width="50%" align="center">
+                    <select id="StopWnd" name="D5">
+                        <option value = "0">1</option>
+                        <option value = "1">2</option>
+                        <option value = "2">3</option>
+                        <option value = "3">4</option>
+                        <option value = "4">5</option>
+                        <option value = "5">6</option>
+                        <option value = "6">7</option>
+                        <option value = "7">8</option>
+                        <option value = "8">9</option>
+                        <option value = "9">10</option>
+                        <option value = "10">11</option>
+                        <option value = "11">12</option>
+                        <option value = "12">13</option>
+                        <option value = "13">14</option>
+                        <option value = "14">15</option>
+                        <option value = "15">16</option>
+                        <option value = "16">17</option>
+                        <option value = "17">18</option>
+                        <option value = "18">19</option>
+                        <option value = "19">20</option>
+                        <option value = "20">21</option>
+                        <option value = "21">22</option>
+                        <option value = "22">23</option>
+                        <option value = "23">24</option>
+                        <option value = "24">25</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td width="50%" align="center"><input type="button" value="获得窗口数目" onClick="GetWndNum();"/></td>
+                <td width="50%" align="center"><input id="TextGetWindowNum" size="7" type="text" /></td>
+            </tr>
+            <tr>
+                <td width="50%" align="center"><input type="button" value="设置窗口数目" onClick="SetWndNum();"/></td>
+                <td width="50%" align="center"><input id="TextSetWindowNum" size="7" type="text" /></td>
+            </tr>
+            <tr>
+                <td width="50%" align="center"><input type="button" value="创建监控点列表" onclick="initCameraList();"/></td>
+                <td width="50%" align="center"><input type="button" value="组树" onclick="initTree();"/></td>
+            </tr>
+            <tr>
+                <td width="50%" align="center">监控点索引</td>
+                <td width="50%" align="center"><input type="text" id="CamerIndexCode" size="16"></td>
+            </tr>
+            <tr>
+                <td width="50%" align="center"><input type="button" value="根据索引预览" onclick="StartPreviewByIndexCode();"></td>
+                <td width="50%" align="center"><input type="button" value="索引空闲预览" onclick="StartFreeWndByIndexCode();"></td>
+            </tr>
+            <tr>
+                <td width="50%" align="center"><input type="button" value="索引指定预览" onclick="StartInWndByIndexCode();"></td>
+                <td width="50%" align="center">
+                    <select id="IndexCodePreview" name="D5">
+                        <option value = "0">1</option>
+                        <option value = "1">2</option>
+                        <option value = "2">3</option>
+                        <option value = "3">4</option>
+                        <option value = "4">5</option>
+                        <option value = "5">6</option>
+                        <option value = "6">7</option>
+                        <option value = "7">8</option>
+                        <option value = "8">9</option>
+                        <option value = "9">10</option>
+                        <option value = "10">11</option>
+                        <option value = "11">12</option>
+                        <option value = "12">13</option>
+                        <option value = "13">14</option>
+                        <option value = "14">15</option>
+                        <option value = "15">16</option>
+                        <option value = "16">17</option>
+                        <option value = "17">18</option>
+                        <option value = "18">19</option>
+                        <option value = "19">20</option>
+                        <option value = "20">21</option>
+                        <option value = "21">22</option>
+                        <option value = "22">23</option>
+                        <option value = "23">24</option>
+                        <option value = "24">25</option>
+                    </select></td>
+            </tr>
+        </table>
+        <br />
+        <div style="text-align: left; background-color: #C0C0C0">
+            权限配置
+        </div>
+        <br />
+        <table width="100%" style="border: thin solid #C0C0C0">
+            <tr>
+                <td width="100%">
+                    <table width="100%">
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;权限配置项
+                                <select id="rightSelId">
+                                    <option value="0">不过滤权限</option>
+                                    <option value="1">预览时判断权限</option>
+                                    <option value="2">建树时过滤权限</option>
+                                </select></td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="20%">
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <div style="text-align:left;background-color: #C0C0C0">云台控制</div>
+        <br />
+        <table width="100%" style="border: thin solid #C0C0C0">
+            <tr>
+                <td width="40%">
+                    <table width="100%" >
+                        <tr>
+                            <td width="33%" align="center"><input type="button" class="ptzBtn" value="左上" onMouseDown = "PTZControl('PTZLeftUp')" onMouseUp="PTZControl('PTZStop')"/></td>
+                            <td width="33%" align="center"><input type="button" class="ptzBtn" value="上" onMouseDown="PTZControl('PTZUp')" onMouseUp="PTZControl('PTZStop')"/></td>
+                            <td width="34%" align="center"><input type="button" class="ptzBtn" value="右上" onMouseDown="PTZControl('PTZRightUp')" onMouseUp="PTZControl('PTZStop')" /></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><input type="button" class="ptzBtn" value="左" onMouseDown="PTZControl('PTZLeft')" onMouseUp="PTZControl('PTZStop')"/></td>
+                            <td align="center"><input type="button" class="ptzBtn" value="自转" onMouseDown="PTZControl('PTZAuto')" /></td>
+                            <td align="center"><input type="button" class="ptzBtn" value="右" onMouseDown="PTZControl('PTZRight')" onMouseUp="PTZControl('PTZStop')"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><input type="button" class="ptzBtn" value="左下" onMouseDown="PTZControl('PTZLeftDown')" onMouseUp="PTZControl('PTZStop')"/></td>
+                            <td align="center"><input type="button" class="ptzBtn" value="下" onMouseDown="PTZControl('PTZDown')" onMouseUp="PTZControl('PTZStop')"/></td>
+                            <td align="center"><input type="button" class="ptzBtn" value="右下" onMouseDown="PTZControl('PTZRightDown')" onMouseUp="PTZControl('PTZStop')"/></td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="20%"><input type="button" class="ptzBtn" value="停止" onMouseDown="PTZControl('PTZStop')" /></td>
+                <td width="40%">
+                    <table width="100%" >
+                        <tr>
+                            <td width="33%" align="center"><input type="button" value="+" onMouseDown="PTZControl('PTZAddTimes')" onMouseUp="PTZControl('PTZStop')"/></td>
+                            <td width="33%" align="center">焦距</td>
+                            <td width="34%" align="center"><input type="button" value="-" onMouseDown="PTZControl('PTZMinusTimes')" onMouseUp="PTZControl('PTZStop')"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><input type="button" value="+" onMouseDown="PTZControl('PTZFarFocus')" onMouseUp="PTZControl('PTZStop')"/></td>
+                            <td align="center">焦点</td>
+                            <td align="center"><input type="button" value="-" onMouseDown="PTZControl('PTZNearFocus')"  onMouseUp="PTZControl('PTZStop')"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><input type="button" value="+" onMouseDown="PTZControl('PTZLargeAperture')" onMouseUp="PTZControl('PTZStop')"/></td>
+                            <td align="center">光圈</td>
+                            <td align="center"><input type="button" value="-" onMouseDown="PTZControl('PTZSmallAperture')" onMouseUp="PTZControl('PTZStop')"/></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" style="border: thin solid #C0C0C0">
+            <tr>
+                <td width="40%"><input type="button" value="调用预置点" onClick="GetPt()" /></td>
+                <td width="60%">
+                    <!--
+                    <select style="width:130px" id="SelectGetpt">
+                        <option value = "1">1</option>
+                        <option value = "2">2</option>
+                        <option value = "3">3</option>
+                        <option value = "4">4</option>
+                        <option value = "5">5</option>
+                        <option value = "6">6</option>
+                        <option value = "7">7</option>
+                        <option value = "8">8</option>
+                        <option value = "9">9</option>
+                        <option value = "10">10</option>
+                        <option value = "11">11</option>
+                        <option value = "12">12</option>
+                        <option value = "13">13</option>
+                        <option value = "14">14</option>
+                        <option value = "15">15</option>
+                        <option value = "16">16</option>
+                    </select>
+                        -->
+                    <input type="text" id="usePreset" value="1"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="40%"><input type="button" value="设置预置点" onClick="SetPt()" /></td>
+                <td width="60%">
+                    <!--
+                    <select style="width:130px" id="SelectSetpt">
+                        <option value = "1">1</option>
+                        <option value = "2">2</option>
+                        <option value = "3">3</option>
+                        <option value = "4">4</option>
+                        <option value = "5">5</option>
+                        <option value = "6">6</option>
+                        <option value = "7">7</option>
+                        <option value = "8">8</option>
+                        <option value = "9">9</option>
+                        <option value = "10">10</option>
+                        <option value = "11">11</option>
+                        <option value = "12">12</option>
+                        <option value = "13">13</option>
+                        <option value = "14">14</option>
+                        <option value = "15">15</option>
+                        <option value = "16">16</option>
+                    </select>
+                    -->
+                    <input type="text" id="setPreset" value="1"/>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <div style="text-align:left;background-color: #C0C0C0">图像参数</div>
+        <br />
+        <table width="100%" style="border: thin solid #C0C0C0">
+            <tr>
+                <td width="80%">
+                    <table width="100%" >
+                        <tr>
+                            <td width="25%" align="center">亮度</td>
+                            <td width="75%" align="center"><input id="TextBright" type="text" style="width:130px" /></td>
+                        </tr>
+                        <tr>
+                            <td align="center">对比度</td>
+                            <td align="center"><input id="TextConstrast" type="text" style="width:130px" /></td>
+                        </tr>
+                        <tr>
+                            <td align="center">饱和度</td>
+                            <td align="center"><input id="TextSaturation" type="text" style="width:130px" /></td>
+                        </tr>
+                        <tr>
+                            <td align="center">色调</td>
+                            <td align="center"><input id="TextHue" type="text" style="width:130px" /></td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="20%"><input type="button" value="获取" onClick="GetVideoEffect()" /><br/><input type="button" value="设置" onClick="SetVideoEffect()" /></td>
+            </tr>
+        </table>
+        <br />
+        <div style="text-align:left;background-color: #C0C0C0">本地配置</div>
+        <br />
+        <table width="100%" style="border: thin solid #C0C0C0">
+            <tr>
+                <td width="40%" align="right">
+                    抓图格式
+                </td>
+                <td width="55%" align="center">
+                    <select style="width: 130px" id="SelectPicType">
+                        <option value="0">
+                            JPEG
+                        </option>
+                        <option value="1">
+                            BMP
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">连续抓图方式</td>
+                <td>
+                    <select style="width: 130px" id="SelectCapMode">
+                        <option value="0">
+                            按时间
+                        </option>
+                        <option value="1">
+                            按帧
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">抓图时间间隔,单位(ms)</td>
+                <td align="center"><input type="text" id="TextTimeSpan" value=1></td>
+            </tr>
+            <tr>
+                <td align="right">抓图张数</td>
+                <td align="center"><input type="text" id="TextCapCounts" value=1></td>
+            </tr>
+            <tr>
+                <td align="right">
+                    抓图路径
+                </td>
+                <td align="center">
+                    <input id="TextPicPath" type="text" style="width: 130px"
+                           value="C:\CapPic" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    最小抓图磁盘空间
+                </td>
+                <td align="center">
+                    <select style="width: 130px" id="MinDiskSpaceForCap">
+                        <option value="256">
+                            256MB
+                        </option>
+                        <option value="512">
+                            512MB
+                        </option>
+                        <option value="1024">
+                            1GB
+                        </option>
+                        <option value="2048">
+                            2GB
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    紧急录像路径
+                </td>
+                <td align="center">
+                    <input id="TextRecordPath" type="text" style="width: 130px"
+                           value="C:\Record" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">录像分包方式</td>
+                <td align="center">
+                    <select style="width: 130px" id="RecordMode">
+                        <option value="0">
+                            按时间分包
+                        </option>
+                        <option value="1">
+                            按大小分包
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    录像文件按秒
+                </td>
+                <td align="center">
+                    <input type="text" id="TextRecordIime" value=10>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    录像文件包大小
+                </td>
+                <td align="center">
+                    <select style="width: 130px" id="PreviewPkgSize">
+                        <option value="256000000">
+                            256MB
+                        </option>
+                        <option selected="selected" value="512000000">
+                            512MB
+                        </option>
+                        <option value="1024000000">
+                            1GB
+                        </option>
+                        <option value="2048000000">
+                            2GB
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <!--					<tr>
+                                     <td align="right">最长录像时间,取0不限制</td>
+                                     <td align="center"><input type="text" id="TextMLongTime"></td>
+                                </tr>-->
+            <tr>
+                <td align="right">
+                    最小录像磁盘空间
+                </td>
+                <td align="center">
+                    <select style="width: 130px" id="MinDiskSpaceForRec">
+                        <option value="256">
+                            256MB
+                        </option>
+                        <option value="512">
+                            512MB
+                        </option>
+                        <option value="1024">
+                            1GB
+                        </option>
+                        <option value="2048">
+                            2GB
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input type="button" value="设置本地参数" onClick="SetlocalParam()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="width:665;float:left;overflow:hidden">
+        <!-- &nbsp;&nbsp;&nbsp;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+            添加预览控件（需要先在windows下注册） -->
+
+        <table width="100%" style="margin: 12px 0 0 15px;">
+            <tr><td colspan="2">
+                    <object classid="clsid:AC036352-03EB-4399-9DD0-602AB1D8B6B9" id="PreviewOcx"  width="650px" height="500" name="ocx" >
+                    </object></td></tr>
+            <tr><td>
+                    <div style="text-align:left;background-color: #C0C0C0;width: 318px; margin-bottom: 4px">调用信息</div>
+                    <div><textarea id="TextInfo" cols="37" rows="12" wrap="physical"></textarea></div>
+                </td>
+                <td>
+                    <div style="text-align:left;background-color: #C0C0C0;width: 320px; margin-bottom: 4px">触发事件信息</div>
+                    <div><textarea id="MsgInfo" cols="37" rows="12" wrap="physical"></textarea></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="cameraList" style="width:300px;height:500px;margin-left:15px;margin-top:15px;float:left;overflow:auto;border: thin solid #808080；">
+        <ul id="tree"></ul>
+    </div>
+
+</div>
+<br/>
+
+</body>
+</html>
+
+
+
+

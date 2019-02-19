@@ -1,0 +1,169 @@
+<?php $__env->startSection('container'); ?>
+    <?php if($user_act): ?>
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+	<span class="l">
+		<a class="btn btn-primary radius add-r" data-for="project" data-title="添加设备" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>添加设备</a>
+	</span>
+        </div>
+    <?php endif; ?>
+    <div class="mt-10 dataTables_wrapper">
+        <table id="table_list" class="table table-border table-bordered table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="50">序号</th>
+                <th width="100">项目名称</th>
+                <th width="100">监理名称</th>
+                <th width="100">合同段名称</th>
+                <th width="100">梁场名称</th>
+                <th width="100">设备名称</th>
+                <th width="100">设备型号</th>
+                <th width="100">设备编号</th>
+                <th width="100">生产厂家</th>
+                <th width="100">生产日期</th>
+                <th width="100">摄像头1</th>
+                <th width="100">摄像头2</th>
+                <th width="100">额定功率(KW)</th>
+                <th width="100">负责人</th>
+                <th width="100">联系方式</th>
+                <?php if($user_is_act): ?>
+                    <th width="80">操作</th>
+                <?php endif; ?>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if($device_data): ?>
+                <?php foreach($device_data as$k=> $v): ?>
+                    <tr class="text-c">
+                        <td><?php echo e($k+1); ?></td>
+                        <td><?php echo e($v['project']['name']); ?></td>
+                        <td><?php echo e($v['sup']['name']); ?></td>
+                        <td><?php echo e($v['section']['name']); ?></td>
+                        <td><?php echo e($v['beam_site']['name']); ?></td>
+                        <td><?php echo e($v['name']); ?></td>
+                        <td><?php echo e($v['model']); ?></td>
+                        <td><?php echo e($v['dcode']); ?></td>
+                        <td><?php echo e($v['factory_name']); ?></td>
+                        <td><?php echo e($v['factory_date']); ?></td>
+                        <td><?php echo e($v['camera1']); ?></td>
+                        <td><?php echo e($v['camera2']); ?></td>
+                        <td><?php echo e($v['parame1']); ?></td>
+                        <td><?php echo e($v['fzr']); ?></td>
+                        <td><?php echo e($v['phone']); ?></td>
+                        <?php if($user_is_act): ?>
+                            <td class="f-14 td-manage">
+                                <a style="text-decoration:none" class="mt-5 device_edit btn btn-secondary radius size-MINI" data-for="section" data-title="编辑设备" data-url="<?php echo e(url('manage/beam_yard_device_edit'.'/'.$v['id'])); ?>" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+                                <a style="text-decoration:none" class="mt-5 ml-5 device-del btn btn-danger radius size-MINI" href="javascript:;" data-id="<?php echo e($v['id']); ?>" data-url="<?php echo e(url('manage/steam_spray_device_del/'.$v['id'])); ?>" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            </tbody>
+        </table>
+
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('layer'); ?>
+    <?php echo $__env->make('admin.device.beam_yard_device_add', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+    <script type="text/javascript" src="/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/lib/zTree/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/common.js"></script>
+    <script type="text/javascript" src="/static/admin/js/ztree_page.js"></script>
+    <script type="text/javascript">
+        list.init();
+        $("#project_id").on('change',function(){
+            var project_id=$(this).val();
+            var url=$(this).attr('data-url');
+
+            $.get(url+'?pro_id='+project_id,function(data){
+                if(data.status==1){
+                    layer.alert(data.mess);
+                }
+                if(data.status==0){
+                    var htmlstr='<option>请选择监理</option>';
+                    console.dir(data.mess);
+                    for(var i=0;i<data.mess.length;i++){
+                        htmlstr+="<option value=\""+data.mess[i].id+"\">"+data.mess[i].name+"</option>";
+                    }
+                    $("#supervision_id").empty().append(htmlstr);
+                }
+            });
+
+        });
+        $("#supervision_id").on('change',function(){
+            var supervision_id=$(this).val();
+            var url=$(this).attr("data-url");
+
+            $.get(url+'?sup_id='+supervision_id,function(data){
+                if(data.status==0){
+                    var htmlstr='<option>请选择合同段</option>';
+                    htmlstr+="<option value=\""+data.mess.id+"\">"+data.mess.name+"</option>";
+                    $("#section_id").empty().append(htmlstr);
+                }
+            });
+        });
+        $("#section_id").on('change',function(){
+//            alert(0);
+            var section_id=$(this).val();
+            var url=$(this).attr("data-url");
+
+            $.get(url+'?sec_id='+section_id,function(data){
+                if(data.status==0){
+                    var htmlstr='<option>请选择梁场</option>';
+                    for(var i=0;i<data.mess.length;i++){
+                        htmlstr+="<option value=\""+data.mess[i].id+"\">"+data.mess[i].name+"</option>";
+                    }
+                    $("#beam_site_id").empty().append(htmlstr);
+                }
+                if(data.status==1){
+                    layer.alert(data.mess);
+                }
+
+            });
+        });
+        $(".device_edit").on('click',function(){
+//    alert(0);
+            var url=$(this).attr("data-url");
+            var title=$(this).attr("data-title");
+
+            layer.open({
+                type: 2,
+                title: title,
+                shadeClose: true,
+                shade: 0.3,
+                area: ['30%', '60%'],
+                content: url
+            });
+
+
+        });
+        $(".device-del").on('click',function(){
+
+            var url=$(this).attr('data-url');
+            layer.confirm('确定要删除吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.get(url,function(data){
+                    if(data.status==1){
+                        layer.alert(data.info);
+                        var id='data-id='+data.id;
+
+                        $("tr ["+id+"]").parent().parent().remove();
+                    }
+                    if(data.status==0){
+                        layer.alert(data.info);
+                    }
+
+                });
+
+            }, function(){
+
+            });
+        });
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.tree', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

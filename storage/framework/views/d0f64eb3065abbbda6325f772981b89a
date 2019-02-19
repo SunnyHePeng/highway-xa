@@ -1,0 +1,57 @@
+<?php $__env->startSection('container'); ?>
+    <meta http-equiv="refresh" content="62">
+    <article class="" id="show_detail">
+            <div class="wl_info col-xs-12 col-sm-8" class="padding-left: 0;">
+                <div class="panel panel-primary">
+                    <div class="panel-header">施工配合比</div>
+                    <div class="panel-body" class="padding: 0;">
+                        <table class="table table-border table-bordered table-bg">
+                            <thead>
+                            <tr class="text-c">
+                                <th width="50">序号</th>
+                                <th width="100">物料名称</th>
+                                <th width="100">设计量KG</th>
+                                <th width="100">投放量KG</th>
+                                <th width="100">偏差率</th>
+                            </tr>
+                            </thead>
+                            <tbody id="detail_info">
+                            <?php foreach($detail_info as $key=>$value): ?>
+                                <?php if($key < 9): ?>
+                                    <?php if(abs($value['pcl']) > $snbhz_detail[$value['type']]['pcl']): ?>
+                                        <?php $cl = 'red-line';?>
+                                    <?php else: ?>
+                                        <?php $cl = '';?>
+                                    <?php endif; ?>
+                                    <tr class="text-c <?php echo e($cl); ?>">
+                                        <td><?php echo e($value['type']); ?></td>
+                                        <td><?php echo e($snbhz_detail[$value['type']]['name']); ?></td>
+                                        <td><?php echo e($value['design']); ?></td>
+                                        <td><?php echo e($value['fact']); ?></td>
+                                        <td><?php echo e($value['pcl']); ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </article>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+    <script type="text/javascript" src="/static/admin/js/common.js"></script>
+    <script type="text/javascript" src="/lib/plupload/2.3.1/js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/upload.js"></script>
+    <script type="text/javascript">
+        list.init();
+
+        var snbhz_detail = eval('('+$('#snbhz_detail').val()+')');
+
+        uploadFile('imgPicker', '<?php echo e(url('snbhz/file/upload')); ?>', 'uploadimg', 'imgList', 'imgShow', {name:'thumb',type:'images'}, 'thumb')
+        uploadFile('filePicker', '<?php echo e(url('snbhz/file/upload')); ?>', 'uploadfiles', 'fileList', 'fileShow', {name:'file',type:'file'}, 'file')
+    </script>
+    <script type="text/javascript" src="/static/admin/js/snbhz_info.js"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.iframe', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

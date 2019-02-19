@@ -1,0 +1,17 @@
+<?php $__env->startSection('container'); ?>
+
+<article class="cl pd-20">
+	<div class="f-14 cl pd-10 bg-1 bk-gray mt-20">
+		<p class="c-error"><?php echo e($info); ?></p>
+	</div>
+</article>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="/static/admin/js/common.js"></script>
+<script type="text/javascript">
+list.init();
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

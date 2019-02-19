@@ -1,0 +1,5 @@
+<div class="dataTables_info">共 <strong><?php echo e($_paginate->lastPage()); ?></strong>页/<strong><?php echo e($_paginate->total()); ?></strong>条</div>
+<div class="dataTables_paginate">
+    <?php echo $_paginate->appends(request()->query())->render(); ?>
+
+</div>

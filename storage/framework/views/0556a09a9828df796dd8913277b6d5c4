@@ -1,0 +1,21 @@
+<?php $__env->startSection('container'); ?>
+
+    <?php echo $__env->make('yj._index_info', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <input type="hidden" value="<?php echo e($ztree_data); ?>" id="tree_data">
+    <input type="hidden" value="<?php echo e($ztree_name); ?>" id="tree_name">
+    <input type="hidden" value="<?php echo e($ztree_url); ?>" id="tree_url">
+    <input type="hidden" value="" id="tree_page">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+    <script type="text/javascript" src="/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/lib/zTree/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/common.js"></script>
+    <script type="text/javascript" src="/static/admin/js/ztree_page.js"></script>
+    <script type="text/javascript">
+        list.init();
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.tree', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

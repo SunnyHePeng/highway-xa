@@ -1,0 +1,24 @@
+﻿@charset "utf-8";
+
+div,td,input
+{
+	font-size:12px;
+}
+.ptzBtn
+{
+	width:32px;
+}
+#Select1
+{
+    width: 67px;
+}
+#SelectWnd
+{
+    width: 70px;
+}
+
+a {
+	/*取消所有的下划线*/
+	text-decoration: none;
+	color: black;
+}

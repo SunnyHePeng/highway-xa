@@ -1,0 +1,73 @@
+<link href="/lib/My97DatePicker/4.8/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<div>
+    <form method="get" name="search">
+        合同段：
+        <span class="select-box inline" style="border:1px solid #ddd;">
+			<select class="select" size="1" name="section_id" id="section_id">
+				<option value="0" >全部合同段</option>
+                <?php if($section_data): ?>
+                    <?php foreach($section_data as $v): ?>
+                        <option value="<?php echo e($v->id); ?>" <?php if($search['section_id']==$v->id): ?> selected="selected"<?php endif; ?>><?php echo e($v->name); ?></option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+			</select>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        张拉时间：
+        <input name="start_date" placeholder="请输入开始时间" value="<?php echo e($search['start_date']); ?>" type="text" onfocus="WdatePicker()" id="start_date" class="input-text Wdate">
+        -
+        <input name="end_date" placeholder="请输入结束时间" value="<?php echo e($search['end_date']); ?>" type="text" onfocus="WdatePicker()" id="end_date" class="input-text Wdate">
+
+        <button class="btn btn-success" type="submit"><i class="Hui-iconfont"></i> 搜索</button>
+
+    </form>
+</div>
+
+<div class="mt-20 dataTables_wrapper">
+    <table id="table_list" class="table table-border table-bordered table-bg table-sort">
+        <thead>
+        <tr class="text-c">
+            <th width="40" class="hidden-xs hidden-sm">序号</th>
+            <th width="80">合同段名称</th>
+            <th width="80">所属梁场</th>
+            <th width="80">设备名称</th>
+            <th width="80">梁号</th>
+            <th width="120">压浆开始时间</th>
+            <th width="100">梁板类型</th>
+            <th width="100">压浆方向</th>
+            <th width="100">压浆剂</th>
+            <th width="100">配合比</th>
+            <th width="100">流动度</th>
+            <th width="100">搅拌时间(min)</th>
+            <th width="100">环境温度</th>
+            <th width="100">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+         <?php if($data): ?>
+           <?php foreach($data as $v): ?>
+               <tr class="text-c">
+                   <td><?php echo e($from++); ?></td>
+                   <td><?php echo e($v['section']['name']); ?></td>
+                   <td><?php echo e($v['beam_site']['name']); ?></td>
+                   <td><?php echo e($v['device']['name']); ?></td>
+                   <td><?php echo e($v['girder_number']); ?></td>
+                   <td><?php echo e(date('Y-m-d H:i:s',$v['time'])); ?></td>
+                   <td><?php echo e($v['girdertype']); ?></td>
+                   <td><?php echo e($v['mudjackdirect']); ?></td>
+                   <td><?php echo e($v['mudjackagent']); ?></td>
+                   <td><?php echo e($v['groutingagent']); ?></td>
+                   <td><?php echo e($v['mobility']); ?></td>
+                   <td><?php echo e($v['stirtime']); ?></td>
+                   <td><?php echo e($v['environment_temperature']); ?></td>
+                   <td>
+                       <input class="btn btn-success radius size-MINI open-detail-data" data-title="详细信息" data-url="<?php echo e(url('mudjack/mudjack_detail'.'/'.$v['id'])); ?>" type="button" value="详细信息">
+                   </td>
+               </tr>
+           <?php endforeach; ?>
+         <?php endif; ?>
+        </tbody>
+    </table>
+    <?php if($last_page>1): ?>
+        <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php endif; ?>
+</div>

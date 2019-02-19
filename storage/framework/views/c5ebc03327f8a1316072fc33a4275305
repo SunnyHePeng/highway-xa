@@ -1,0 +1,55 @@
+
+<div class=" col-xs-12 col-sm-12" class="padding-left: 0; ">
+    <div class="panel panel-info">
+        <div class="panel-header text-c"></div>
+        <div class="panel-body" class="padding: 0;">
+            <table id="table_list" class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th width="40" class="hidden-xs hidden-sm">序号</th>
+                    <th width="100">时间</th>
+                    <th width="100" >合同段</th>
+                    <th width="50">位置</th>
+                    <th width="50">暗洞掘进(米)</th>
+                    <th width="50">初期支护(米)</th>
+                    <th width="50" >仰拱开挖(米)</th>
+                    <th  width="50">仰拱浇筑(米)</th>
+                    <th width="50">防水板铺挂(米)</th>
+                    <th width="50">二衬浇筑(米)</th>
+                    <th width="50">二衬钢筋绑扎(米)</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <?php if($data): ?>
+                       <?php foreach($data as $k=>$v): ?>
+                           <tr class="text-c">
+                              <td class="hidden-xs hidden-sm"><?php if(isset($from)): ?><?php echo e($from++); ?><?php else: ?><?php echo e($k+1); ?><?php endif; ?></td>
+                              <td><?php echo e(date('Y-m-d',$v['time'])); ?></td>
+                              <td><?php echo e($v['section']['name']); ?></td>
+                               <td>
+                                   <?php if($v['site']==1): ?>
+                                       左洞
+                                   <?php else: ?>
+                                       右洞
+                                   <?php endif; ?>
+                               </td>
+                               <td><?php echo e($v['adjj']); ?></td>
+                               <td><?php echo e($v['cqzh']); ?></td>
+                               <td><?php echo e($v['ygkw']); ?></td>
+                               <td><?php echo e($v['ygjz']); ?></td>
+                               <td><?php echo e($v['fsbpg']); ?></td>
+                               <td><?php echo e($v['ecjz']); ?></td>
+                               <td><?php echo e($v['gjbz']); ?></td>
+                           </tr>
+                       <?php endforeach; ?>
+                  <?php endif; ?>
+                </tbody>
+            </table>
+            <?php if(isset($last_page) && !array_key_exists('d',$search)): ?>
+                <?php if($last_page>1): ?>
+                    <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+
+<?php if($search['type']==1): ?>
+<div class=" col-xs-12 col-sm-12 mt-10" class="padding-left: 0; ">
+    <div class="panel panel-info">
+        <div class="panel-body" class="padding: 0;">
+            <table id="table_list" class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th width="40">序号</th>
+                    <th width="100">时间</th>
+                    <th width="100" >合同段</th>
+                    <th width="80">位置</th>
+                    <th width="50">掌子面开挖(人)</th>
+                    <th width="50">初期支护(人)</th>
+                    <th width="50">仰拱开挖(人)</th>
+                    <th width="50">仰拱浇筑(人)</th>
+                    <th width="50">防水板铺挂(人)</th>
+                    <th width="50">二衬施工(人)</th>
+                </tr>
+                </thead>
+                <tbody>
+                   <?php if($data): ?>
+                     <?php foreach($data as $k=>$v): ?>
+                         <tr class="text-c">
+                            <td><?php if(isset($from)): ?><?php echo e($from++); ?><?php else: ?><?php echo e($k+1); ?><?php endif; ?></td>
+                            <td><?php echo e(date('Y-m-d',$v['time'])); ?></td>
+                            <td><?php echo e($v['section']['name']); ?></td>
+                            <td>
+                               <?php if($v['site']==1): ?>
+                                   左洞
+                               <?php elseif($v['site']==2): ?>
+                                   右洞
+                               <?php endif; ?>
+                            </td>
+                            <td><?php echo e($v['zzmkw']); ?></td>
+                             <td><?php echo e($v['cqzh']); ?></td>
+                             <td><?php echo e($v['ygkw']); ?></td>
+                             <td><?php echo e($v['ygjz']); ?></td>
+                             <td><?php echo e($v['fsbpg']); ?></td>
+                             <td><?php echo e($v['ecjz']); ?></td>
+                         </tr>
+                     <?php endforeach; ?>
+                   <?php endif; ?>
+                </tbody>
+            </table>
+            <?php if(isset($last_page) && !array_key_exists('d',$search)): ?>
+                <?php if($last_page>1): ?>
+                    <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<?php elseif($search['type']==2): ?>
+    <div class=" col-xs-12 col-sm-12 mt-10" class="padding-left: 0; ">
+        <div class="panel panel-info">
+            <div class="panel-body" class="padding: 0;">
+                <table id="table_list" class="table table-border table-bordered table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th width="40">序号</th>
+                        <th width="100">时间</th>
+                        <th width="100" >合同段</th>
+                        <th width="80">位置</th>
+                        <th width="50">湿喷机械手(台)</th>
+                        <th width="50">防水板铺挂台车(台)</th>
+                        <th width="50">二衬台车(台)</th>
+                        <th width="50">二衬养生台车(台)</th>
+                        <th width="50">自行式整体栈桥液压仰拱模板台车(台)</th>
+                        <th width="50">液压水沟电缆槽台车(台)</th>
+                        <th width="50">雾炮车(台)</th>
+                        <th width="50">挖掘机(台)</th>
+                        <th width="50">装载机(台)</th>
+                        <th width="50">自卸车(台)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php if($data): ?>
+                          <?php foreach($data as $k=>$v): ?>
+                              <tr class="text-c">
+                                <td><?php if(isset($from)): ?><?php echo e($from++); ?><?php else: ?><?php echo e($k+1); ?><?php endif; ?></td>
+                                <td><?php echo e(date('Y-m-d',$v['time'])); ?></td>
+                                <td><?php echo e($v['section']['name']); ?></td>
+                                <td>
+                                    <?php if($v['site']==1): ?>
+                                        左洞
+                                    <?php elseif($v['site']==2): ?>
+                                        右洞
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo e($v['spjxs']); ?></td>
+                                <td><?php echo e($v['fsbpgtc']); ?></td>
+                                <td><?php echo e($v['ectc']); ?></td>
+                                <td><?php echo e($v['ecystc']); ?></td>
+                                <td><?php echo e($v['ygmbtc']); ?></td>
+                                <td><?php echo e($v['sgdlctc']); ?></td>
+                                <td><?php echo e($v['wpc']); ?></td>
+                                <td><?php echo e($v['wjj']); ?></td>
+                                <td><?php echo e($v['zzj']); ?></td>
+                                <td><?php echo e($v['zxc']); ?></td>
+                              </tr>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+                <?php if(isset($last_page) && !array_key_exists('d',$search)): ?>
+                    <?php if($last_page>1): ?>
+                        <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

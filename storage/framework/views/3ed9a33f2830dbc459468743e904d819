@@ -1,0 +1,187 @@
+<?php $__env->startSection('container'); ?>
+<article class="page-container" id="show_detail">
+	<?php if(($user['role'] == 3 || $user['role'] == 4 || $user['role'] == 5) && $snbhz_info['is_warn']): ?>
+	<div class="cl mb-10"> 
+	  <span class="l">
+	    <a style="text-decoration:none" data-for='module' class="ml-5 open-iframe btn btn-secondary radius size-MINI" href="javascript:;" data-id="<?php echo e($snbhz_info['id']); ?>" data-url="<?php echo e(url('snbhz/deal/'.$snbhz_info['id'].'?d_id='.$snbhz_info['device_id'])); ?>" data-is-reload="1" data-title="处理意见" title="处理">报警处理</a>
+      </span>
+	</div>
+	<?php endif; ?>
+	<div class="row cl hidden-xs">
+	  <div class="wl_info col-xs-12 col-sm-12" class="padding-left: 0;">
+	  	<table class="table table-border table-bordered table-bg">
+          <thead>
+            <tr class="text-c">
+              <th width="100">工程名称</th> 
+              <th width="100">生产时间</th>               
+              <th width="100">生产单位</th>
+              <th width="100">施工地点</th>
+              <th width="100">浇筑部位</th>
+              <th width="100">强度等级</th>
+              <th width="100">盘方量(方)</th>
+              <th width="100">拌和时长(秒)</th>
+              <th width="100">操作员</th>
+            </tr>
+          </thead>
+          <tbody id="snbhz_info">
+          	<tr>
+            	<td><?php echo e($snbhz_info['project']['name']); ?></td>
+               	<td><?php echo e($snbhz_info['time']); ?></td>
+               	<td><?php echo e($snbhz_info['scdw']); ?></td>
+               	<td><?php echo e($snbhz_info['sgdd']); ?></td>
+               	<td><?php echo e($snbhz_info['jzbw']); ?></td>
+               	<td><?php echo e($snbhz_info['pbbh']); ?></td>
+               	<td><?php echo e($snbhz_info['pfl']); ?></td>
+               	<td><?php echo e($snbhz_info['jssj'] - $snbhz_info['kssj']); ?></td>
+               	<td><?php echo e($snbhz_info['operator']); ?></td>
+            </tr>
+          </tbody>
+        </table>
+	  </div>
+	</div>
+	<div class="row cl visible-xs">
+	  <div class="wl_info col-xs-12 col-sm-12" class="padding-left: 0;">
+	  	<table class="table table-border table-bordered table-bg">
+          <thead>
+            <tr class="text-c">
+              <th width="100">工程名称</th> 
+              <td><?php echo e($snbhz_info['project']['name']); ?></td>
+            </tr>
+            <tr class="text-c">
+              <th width="100">生产时间</th>
+              <td><?php echo e($snbhz_info['time']); ?></td> 
+            </tr>
+            <tr class="text-c">              
+              <th width="100">生产单位</th>
+              <td><?php echo e($snbhz_info['scdw']); ?></td>
+            </tr>
+            <tr class="text-c">
+              <th width="100">施工地点</th>
+              <td><?php echo e($snbhz_info['sgdd']); ?></td>
+            </tr>
+            <tr class="text-c">
+              <th width="100">浇筑部位</th>
+              <td><?php echo e($snbhz_info['jzbw']); ?></td>
+            </tr>
+            <tr class="text-c">
+              <th width="100">配比编号</th>
+              <td><?php echo e($snbhz_info['pbbh']); ?></td>
+            </tr>
+            <tr class="text-c">
+              <th width="100">盘方量(方)</th>
+              <td><?php echo e($snbhz_info['pfl']); ?></td>
+            </tr>
+            <tr class="text-c">
+              <th width="100">拌和时长(秒)</th>
+              <td><?php echo e($snbhz_info['jssj'] - $snbhz_info['kssj']); ?></td>
+            </tr>
+            <tr class="text-c">
+              <th width="100">操作员</th>
+              <td><?php echo e($snbhz_info['operator']); ?></td>
+            </tr>
+          </thead>
+        </table>
+	  </div>
+	</div> 	
+	<div class="row cl mt-20">
+	  <div class="wl_info col-xs-12 col-sm-8" class="padding-left: 0;">
+	    <div class="panel panel-primary">
+	      <div class="panel-header">物料信息</div>
+	      <div class="panel-body" class="padding: 0;">
+	        <table class="table table-border table-bordered table-bg">
+	          <thead>
+	            <tr class="text-c">
+	              <th width="50">序号</th>                
+	              <th width="100">物料名称</th>
+	              <th width="100">设计量KG</th>
+	              <th width="100">投放量KG</th>
+	              <th width="100">偏差率%</th>
+	            </tr>
+	          </thead>
+	          <tbody id="detail_info">
+	          	<?php foreach($detail_info as $key=>$value): ?>
+	          	<?php if($key < 9): ?>
+			      <?php if(abs($value['pcl']) > $snbhz_detail[$value['type']]['pcl']): ?>
+			        <?php $cl = 'red-line';?>
+			      <?php else: ?>
+			      	<?php $cl = '';?>
+			      <?php endif; ?>
+    			<tr class="text-c <?php echo e($cl); ?>">
+                   	<td><?php echo e($value['type']); ?></td>
+                   	<td><?php echo e($snbhz_detail[$value['type']]['name']); ?></td>
+                   	<td><?php echo e($value['design']); ?></td>
+                   	<td><?php echo e($value['fact']); ?></td>
+                  	<td><?php echo e($value['pcl']); ?></td>
+                </tr>
+                <?php endif; ?>
+                <?php endforeach; ?>
+	          </tbody>
+	        </table>
+	      </div>
+	    </div>
+	  </div>
+
+	  <div class="deal_info col-xs-12 col-sm-4" class="padding-right: 0;">
+	    <div class="panel panel-primary">
+	      <div class="panel-header">处理信息</div>
+	      <div class="panel-body" id="deal_info" style="min-height: 150px;">
+	      	<?php if($snbhz_info['is_warn']): ?>
+	      		<?php if($deal_info['sec_time']): ?>
+	      			<p>(标段)处理人：<?php echo e($deal_info['sec_name']); ?></p>
+	      			<p>(标段)处理意见：<?php echo e($deal_info['sec_info']); ?>
+
+	      			<?php if($deal_info['sec_img']): ?>
+	      				<div style="margin-left: 50px;"><a href="<?php echo e(Config()->get('common.show_path').$deal_info['sec_img']); ?>" target="_blank"><img width="150px" src="<?php echo e(Config()->get('common.show_path').$deal_info['sec_img']); ?>"></a></div>
+	      			<?php endif; ?>
+	      			<?php if($deal_info['sec_file']): ?>
+	      				<div style="margin-left: 50px;"><a href="<?php echo e(Config()->get('common.show_path').$deal_info['sec_file']); ?>" target="_blank">查看处理文档</a></div>
+	      			<?php endif; ?>
+	      			</p>
+	      			<p>(标段)处理时间：<?php echo e(date('Y-m-d H:i:s', $deal_info['sec_time'])); ?></p>
+	      		<?php else: ?>
+	      			<p>(标段)处理人：</p>
+	      			<p>(标段)处理意见：</p>
+	      			<p>(标段)处理时间：</p>
+	      		<?php endif; ?>
+
+	      		<?php if($deal_info['sup_time']): ?>
+	      			<p>(监理)处理人：<?php echo e($deal_info['sup_name']); ?></p>
+	      			<p>(监理)处理意见：<?php echo e($deal_info['sup_info']); ?>
+
+	      			<?php if($deal_info['sup_img']): ?>
+	      				<div style="margin-left: 50px;"><a href="<?php echo e(Config()->get('common.show_path').$deal_info['sup_img']); ?>" target="_blank"><img width="150px" src="<?php echo e(Config()->get('common.show_path').$deal_info['sup_img']); ?>"></a></div>
+	      			<?php endif; ?>
+	      			<?php if($deal_info['sup_file']): ?>
+	      				<div style="margin-left: 50px;"><a href="<?php echo e(Config()->get('common.show_path').$deal_info['sup_file']); ?>" target="_blank">查看处理文档</a></div>
+	      			<?php endif; ?>
+	      			</p>
+	      			<p>(监理)处理时间：<?php echo e(date('Y-m-d H:i:s', $deal_info['sup_time'])); ?></p>
+	      		<?php else: ?>
+	      			<p>(监理)处理人：</p>
+	      			<p>(监理)处理意见：</p>
+	      			<p>(监理)处理时间：</p>
+	      		<?php endif; ?>
+
+	      	<?php endif; ?>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</article>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="/static/admin/js/common.js"></script>
+<script type="text/javascript" src="/lib/plupload/2.3.1/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/upload.js"></script> 
+<script type="text/javascript">
+list.init();
+
+var snbhz_detail = eval('('+$('#snbhz_detail').val()+')');
+
+uploadFile('imgPicker', '<?php echo e(url('snbhz/file/upload')); ?>', 'uploadimg', 'imgList', 'imgShow', {name:'thumb',type:'images'}, 'thumb')
+uploadFile('filePicker', '<?php echo e(url('snbhz/file/upload')); ?>', 'uploadfiles', 'fileList', 'fileShow', {name:'file',type:'file'}, 'file')
+</script>
+<script type="text/javascript" src="/static/admin/js/snbhz_info.js"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.iframe', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

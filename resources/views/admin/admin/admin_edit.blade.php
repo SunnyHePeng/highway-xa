@@ -1,0 +1,139 @@
+<style type="text/css">
+    #passstr_div {display: none;}
+    #passStrength{height:8px;width:320px;border:1px solid #ccc;padding:1px 0;margin-bottom: -20px;}
+    .strengthLv0{background:red;height:8px;width:10%;}
+    .strengthLv1{background:red;height:8px;width:40%;}
+    .strengthLv2{background:orange;height:8px;width:70%;}
+    .strengthLv3{background:green;height:8px;width:100%;}
+    #cp_div {display: none;}
+</style>
+<article class="page-container" id="layer-edit">
+    <form class="form form-horizontal" id="form_container" data-url="{{url('manage/admin')}}">
+        <div class="row cl show-all hidden-jtyh">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>单位名称：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box">
+                    <select class="select" id="company_id" name="company_id" placeholder="请先选择单位名称">
+                        <option value="0">请选择单位名称</option>
+                        @if(isset($company))
+                        @foreach($company as $key=>$val )
+                        <option value="{{ $val['id'] }}">{{ $val['name'] }}</option>
+                        @endforeach
+                        @endif
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl show-all hidden-jtyh">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>部门名称：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box">
+                    <select class="select" id="department_id" name="department_id" placeholder="请先选择部门名称">
+                        <option value="0">请选择部门名称</option>
+                        @if(isset($department_list))
+                            @foreach($department_list as $key=>$val )
+                                <option value="{{ $val['id'] }}">{{ $val['name'] }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl show-all">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>所属职位：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box">
+                    <select class="select msg_must" id="position_id" name="position_id" placeholder="请先选择所属职位">
+                        <option value="0">请选择职位</option>
+                        @if(isset($position))
+                        @foreach($position as $key=>$val )
+                        <option value="{{ $val['id'] }}">{{ $val['name'] }}</option>
+                        @endforeach
+                        @endif
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="row cl show-all">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>姓名：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text msg_must" value="" placeholder="请输入姓名" id="name" name="name" required readonly style="background-color:#eee;">
+            </div>
+        </div>
+        <div class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>联系方式：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text msg_must" value="" placeholder="请输入联系方式" id="phone" name="phone" required>
+            </div>
+        </div>
+        <div class="row cl show-all">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>登录账号：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text msg_must" value="" placeholder="请输入登录账号" id="username" name="username" required readonly style="background-color:#eee;">
+            </div>
+        </div>
+        <div id="pass" class="row cl show-all">
+            <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>密码：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="password" class="input-text msg_must" value="" placeholder="请输入密码" placeholder="" id="password" name="password" required>
+            </div>
+        </div>
+        <div id="passstr_div" class="row cl">
+            <label class="form-label col-xs-3 col-sm-3">密码强度：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <div id="passStrength"></div>
+            </div>
+        </div>
+        <div class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3">海康登录账号：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="请输入海康登录账号" id="hk_username" name="hk_username" >
+            </div>
+        </div>
+        <div id="pass" class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3">海康密码：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="请输入海康密码" placeholder="" id="hk_password" name="hk_password">
+            </div>
+        </div>
+        <div  class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3">工资系统账号ID：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="工资系统账号ID" placeholder="" id="nmgz" name="nmgz">
+            </div>
+        </div>
+        <div  class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3">边坡监测系统登陆账号：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="边坡监测系统登陆账号" placeholder="" id="bpjc_user" name="bpjc_user">
+            </div>
+        </div>
+        <div  class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3">边坡监测系统key：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="边坡监测系统key" placeholder="" id="bpjc_pass" name="bpjc_pass">
+            </div>
+        </div>
+        <div  class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3">身份证号：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="身份证号" placeholder="" id="IDNumber" name="IDNumber">
+            </div>
+        </div>
+        <div  class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3">隧道监控量测系统账号：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="隧道监控量测系统账号" id="tunnel_monitor_account" name="tunnel_monitor_account">
+            </div>
+        </div>
+        <div  class="row cl show-all hidden-pass">
+            <label class="form-label col-xs-3 col-sm-3">隧道监控量测系统密码：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="隧道监控量测系统密码" id="tunnel_monitor_password" name="tunnel_monitor_password">
+            </div>
+        </div>
+        <input type="hidden" value="" id="id" name="id">
+        <input type="hidden" value="" id="act_type" name="act_type">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    </form>
+</article>

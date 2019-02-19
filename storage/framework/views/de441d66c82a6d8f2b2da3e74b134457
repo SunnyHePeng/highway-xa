@@ -1,0 +1,16 @@
+<?php $__env->startSection('content'); ?>
+	<div class="login-form error">
+		<?php echo e($error); ?><br><br>
+		<?php 
+			$url = isset($url) ? $url : 'javascript:history.back();';
+			$btn = isset($btn) ? $btn : '';
+		?>
+		
+		<a href="<?php echo e($url); ?>">返回</a>
+		<?php if($btn): ?>
+		&emsp;&emsp;&emsp;&emsp;&emsp;<a href="<?php echo e($btn['url']); ?>"><?php echo e($btn['name']); ?></a>
+		<?php endif; ?>
+	</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.login', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>edit</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/font.css">
+</head>
+<body>
+<div class="container row-fluid">
+	<div class="column2 aside pageHeight">
+		<div class="home-wrap">
+			<a href="/" class="go-home">
+				<i class="fa fa-home" aria-hidden="true"></i><span>回首页</span>
+			</a>
+		</div>
+		<div class="new-notebook"> 
+			<a href="javascript:;" class="create-notebook slide-toggle"> 
+				<i class="iconfont-13 icon-xinjian"></i> 新建文集 
+				<img src="./images/loading.gif" class="hide create-notebook-loader"> 
+			</a> 
+			<div class="new-notebook-form hide slide-div"> 
+				<form class="create-notebook-form"> 
+					<input placeholder="请输入文集名..." type="text" name="name" class="notebook-input"> 
+					<a href="javascript:;" class="btn cancel cancel-create-notebook"> 取消 </a>
+					<input class="btn btn-mainRed submit" name="commit" type="submit" value="提交"> 
+				</form> 
+			</div>
+		</div>
+		<ul class="notebooks">
+			<li class="one-notebook active" data-model="notebook" data-cid="c-2"> 
+				<a href="javascript:;" data-type="active" class="notebook-name">
+					<span>cpfang</span>
+				</a> 
+				<a href="javascript:;" class="edit-notebook slide-toggle"><i class="iconfont-14 icon-shezhi"></i> 
+				</a> 
+				<ul class="dropdown-menu hide slide-div edit-notebook-item arrow-top"> 
+					<li> 
+						<a href="javascript:;" class="rename-notebook"> <i class="iconfont-13 icon-xiugai"></i> 修改文集名 </a> 
+					</li>
+					<li> 
+						<a href="javascript:;" class="delete-notebook"> <i class="iconfont-13 icon-shanchu"></i> 删除文集 </a>
+					</li>
+				</ul>
+			</li>
+			<li class="one-notebook" data-model="notebook" data-cid="c-2"> 
+				<a href="javascript:;" data-type="active" class="notebook-name">
+					<span>cpfang</span>
+				</a> 
+				<a href="javascript:;" data-type="edit" class="edit-notebook dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-gear"></i> 
+				</a> 
+				<ul class="hide arrow-top"> 
+					<li> 
+						<a href="javascript:;" data-toggle="modal"> <i class="fa fa-pencil-square-o rename-notebook"></i> 修改文集名 </a> 
+					</li> 
+					<li class="divider"></li> 
+					<li> 
+						<a href="javascript:;" class="delete-notebook"> <i class="fa fa-trash-o"></i> 删除文集 </a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<div class="recycle"> 
+			<a class="btn recycle-mode" href="javascript:;">
+				<i class="iconfont-16 icon-shanchu"></i><span> 回收站</span>
+			</a>
+		</div>
+	</div>
+	<div class="column3 middle pageHeight">
+		<div id="notes-list"> 
+			<div id="new-note"> 
+				<a href="javascript:;" class="create-note"> 
+					<i class="iconfont-13 icon-xinjian"></i> 
+					<span class="win-text">新建文章 <img src="./images/loading.gif" class="hide cnlt loader-tiny"></span> 
+				</a> 
+			</div> 
+			<ul class="notes">  
+				<li class="one-note active" data-model="note" data-cid="c-3"> 
+					<i class="icon icon-note note-icon shared"></i> 
+					<p class="description">1、最简单的例子，了解 prototype：(1) Number.add(num)：作用，数字相加实现方法：Number.</p> 
+					<p class="words-count">字数: 142</p> 
+					<a href="javascript:;" class="note-link title">代码</a> 
+
+					<a href="javascript:;" class="share-note slide-toggle"><i class="iconfont-14 icon-shezhi"></i></a> 
+
+					<ul class="dropdown-menu arrow-top slide-div">  
+						<li><a href="javascript:;"> <i class="fa fa-lock"></i> 已发布</a></li>
+						<!-- <li class="dropdown-submenu pull-left"> 
+							<a tabindex="-1" href="#"><i class="fa fa-share"></i>分享到</a> 
+							<ul class="dropdown-menu share-to-social-network"> 
+								<li> <a href="javascript:;" data-action="share-to-weibo"> <img src="./images/weibo.png"> </a> </li>  
+								<li> <a href="" title="分享到腾讯微博"> <img src="//cdn-qn0.jianshu.io/assets/social_icons/32x32/tweibo-ee601d3852c427e48742e87cdae5673f.png"> </a></li>  
+								<li> <a href="" title="分享到QQ空间"> <img src="//cdn-qn0.jianshu.io/assets/social_icons/32x32/qzone-fa418c9b6e080ec8e115aa41c0abad7c.png"> </a> </li>  
+								<li> <a href="" title="分享到豆瓣"> <img src="//cdn-qn0.jianshu.io/assets/social_icons/32x32/douban-f91311d92549096907f195b1ab47cfed.png"> </a></li>  
+								<li> <a href="" title="分享到Twitter"> <img src="//cdn-qn0.jianshu.io/assets/social_icons/32x32/twitter-be6050af80505fb94bbb485d657bfb07.png"> </a> </li>  
+								<li> <a href="" title="分享到Facebook"> <img src="//cdn-qn0.jianshu.io/assets/social_icons/32x32/facebook-917b7a3f6057bfe4ded7fc4e30971cdb.png"> </a> </li>  
+								<li> <a href="" title="分享到Google+"> <img src="//cdn-qn0.jianshu.io/assets/social_icons/32x32/google_plus-47a3983aad7ec4d1085d82a5bd0ed3b7.png"> </a> </li>  
+							</ul>
+						</li> -->
+						<li> <a href="javascript:;"> <i class="fa fa-lock"></i> 设为私密 </a></li>
+					</ul> 
+				</li> 
+				<li class="one-note" data-model="note" data-cid="c-3"> 
+					<i class="icon icon-note note-icon shared"></i> 
+					<p class="description">1、最简单的例子，了解 prototype：(1) Number.add(num)：作用，数字相加实现方法：Number.</p> 
+					<p class="words-count">字数: 142</p> 
+					<a href="javascript:;" class="note-link title">代码</a> 
+
+					<a href="javascript:;" class="share-note slide-toggle"><i class="iconfont-14 icon-shezhi"></i></a> 
+
+					<ul class="dropdown-menu arrow-top slide-div">  
+						<li><b><i class="fa fa-check"></i>已发布</b></li>
+						<li> <a href="javascript:;" data-action="go-private"> <i class="fa fa-lock"></i> 设为私密 </a></li>
+					</ul> 
+				</li>   
+			</ul>  
+			<div class="one-note new-note-bottom"> 
+				<a href="javascript:;" data-action="create-note">
+					<i class="iconfont-13 icon-xinjian"></i> 在下方新建文章 <img src="./images/loading.gif" class="hide cnlb loader-tiny">
+				</a> 
+			</div> 
+		</div>
+		<div id="move-note-modal" tabindex="-1" aria-hidden="true" class="move-note-modal modal hide fade fullscreen"> 
+			<div class="modal-header"> <b>移动文章到</b> </div> 
+			<div class="modal-body"> <ul class="notebooks-select"> </ul> </div> 
+			<div class="modal-footer"> <button class="btn cancel-button">取消</button> <input data-action="submit-move-note" class="btn btn-info" name="commit" type="submit" value="提交"> </div>
+		</div>
+	</div>
+	<div class="column7 main">
+		<form class="note-form rich-text">
+			<input class="title mousetrap" name="title" id="title" type="text" value="标题">
+			<div id="editor" class="editor-box">
+				<ul class="toolbar">
+					<li><button type="button" class="iconfont-18 icon-B1" data-title="粗体" data-type="bold"></button></li>
+					<li><button type="button" class="iconfont-18 icon-xieti4" data-title="斜体" data-type="italic"></button></li>
+					<li><button type="button" class="iconfont-18 icon-xiahuaxian-copy" data-title="文字下划线" data-type="underline"></button></li>
+					<li><button type="button" class="iconfont-18 icon-shanchuxian" data-title="删除线" data-type="strikeThrough"></button></li>
+					<li class="menu">
+						<button type="button" class="iconfont-18 icon-icxiangmufuhaodaishuzi24px" data-title="有序列表" data-type="insertOrderedList"></button>
+						<ul class="submenu">
+							<li><button type="button" class="iconfont-18 icon-icxiangmufuhaodaishuzi24px" data-title="有序列表" data-type="insertOrderedList"></button></li>
+							<li><button type="button" class="iconfont-18 icon-wuxuliebiao" data-title="无序列表" data-type="insertUnorderedList"></button></li>
+						</ul>
+					</li>
+					<li class="menu">
+						<button type="button" class="iconfont-18 icon-juzuo1" data-title="居左"></button>
+						<ul class="submenu">
+							<li><button type="button" class="iconfont-18 icon-juzuo1" data-title="居左" data-type="justifyLeft"></button></li>
+							<li><button type="button" class="iconfont-18 icon-juzhong4" data-title="居中" data-type="justifyCenter"></button></li>
+							<li><button type="button" class="iconfont-18 icon-juyou1" data-title="居右" data-type="justifyRight"></button></li>
+						</ul>
+					</li>
+					<li class="menu">
+						<button type="button" data-title="标题一" data-type="H1">H1</button>
+						<ul class="submenu">
+							<li><button type="button" data-toggle="tooltip" data-title="标题一" data-type="H1">H1</button></li>
+							<li><button type="button" data-toggle="tooltip" data-title="标题二" data-type="H2">H2</button></li>
+							<li><button type="button" data-toggle="tooltip" data-title="标题三" data-type="H3">H3</button></li>
+							<li><button type="button" data-toggle="tooltip" data-title="标题四" data-type="H4">H4</button></li>
+						</ul>
+					</li>
+					<li><button type="button" class="iconfont-18 icon-yinyong" data-title="引用" data-type="blockquote"></button></li>
+					<li><button type="button" class="iconfont-18 icon-fengexian" data-title="分割线" data-type="insertHorizontalRule"></button></li>
+					<li><button type="button" class="iconfont-18 icon-module-link" data-title="插入链接" data-type="createLink"></button></li>
+					<li><button type="button" class="iconfont-18 icon-image" data-title="插入图片" data-type="insertImage"></button></li>
+					<li><button type="button" class="iconfont-18 icon-video" data-title="插入视频" data-type="insertVideo"></button></li>
+					<li class="menu">
+						<button type="button" class="iconfont-18 icon-chexiao" data-title="撤销" data-type="undo"></button>
+						<ul class="submenu">
+							<li><button type="button" class="iconfont-18 icon-chexiao" data-title="撤销" data-type="undo"></button></li>
+							<li><button type="button" class="iconfont-18 icon-iconchexiao" data-title="重做" data-type="redo"></button></li>
+						</ul>
+					</li>
+
+					<li class="right"><button type="button" class="iconfont-18 icon-fabu2" data-title="发布更新" data-type="save"></button></li>  
+					<!-- <li class="right"><button type="button" class="iconfont-18 icon-fangda" data-title="切换到写作模式"></button></li> --> 
+					<li class="right"><button type="button" class="iconfont-18 icon-baocun" data-title="保存" data-type="publish"></button> </li> 
+					<span class="saving-notice">已保存</span>
+				</ul>
+				<article id="editor-area" class="editor-area mousetrap" contenteditable="true">
+					<p>1、最简单的例子，了解 prototype：<br></p><p><a href="" target="_blank">(1) Number.add(num)：作用，数字相加</a></p><p>实现方法：Number.prototype.add = function(num){return(this+num);}</p><p>试验：alert((3).add(15)) -&gt; 显示 18</p><p><a href="" target="_blank">(2) Boolean.rev(): 作用，布尔变量取反</a></p><h4>实现方法：Boolean.prototype.rev = function(){return(!this);}</h4><p>试验：alert((true).rev()) -&gt; 显示 false</p><p>是不是很简单？这一节仅仅是告诉读者有这么一种方法，这种方法是这样运用的。</p><p><a href="" target="_blank">2、已有方法的实现和增强，初识 prototype：</a></p>
+				</article>
+			</div>
+			<div class="modal-div">
+				<div id="link-modal" class="modal link-modal hide"> 
+					<div class="modal-header"> <h3>插入链接</h3> </div> 
+					<div class="modal-body"> 
+						<div class="input-div"> 
+							<span class="icon"><i class="iconfont-14 icon-module-link"></i></span> 
+							<input class="input" name="href" placeholder="链接地址" type="text"> 
+						</div> 
+						<div class="input-div"> 
+							<span class="icon"><i class="iconfont-14 icon-a"></i></span> 
+							<input class="input" name="text" placeholder="链接文本" type="text"> 
+						</div> 
+						<span class="message"></span> 
+						<button type="button" data-id="link-modal" class="btn ok">确认</button> 
+						<button type="button" data-id="link-modal" class="btn cancel">取消</button> 
+					</div>
+				</div>
+				<div id="video-modal" class="modal video-modal hide"> 
+					<div class="modal-header"> 
+						<h3>插入视频</h3> 
+						<span>目前只支持<a href="http://www.youku.com/" target="_blank">优酷</a>、<a href="http://www.tudou.com/" target="_blank">土豆</a>、<a href="http://v.qq.com/" target="_blank">腾讯视频的flash地址</a>。</span> 
+					</div> 
+					<div class="modal-body"> 
+						<div class="input-div"> 
+							<span class="icon"><i class="iconfont-14 icon-module-link"></i></span> 
+							<input class="input" name="url" placeholder="请输入视频链接" type="text"> 
+						</div> 
+						<span class="message"></span> 
+						<button type="button" data-id="video-modal" class="btn ok">确认</button> 
+						<button type="button" data-id="video-modal" class="btn cancel">取消</button> 
+					</div>
+				</div>
+				<div id="image-modal" class="modal image-modal hide"> 
+					<div class="modal-header"> 
+						<h3>插入图片</h3> 
+					</div> 
+					<div class="modal-body"> 
+						<div class="tab-content"> 
+							<div class="clearfix hide" id="image-upload"> 
+								<a href="#" class="upload-picture"> 
+									<label for="kalamu-upload-image"><i class="fa picture-o"></i> 点击上传（可多张）</label> 
+									<input id="kalamu-upload-image" class="btn-upload-link" type="file" name="file" accept="image/*" multiple="multiple">点击上传（可多张） 
+								</a> 
+								<a class="switch" data-for="image-external">或选择网络图片</a> 
+								<p>
+									<a href="###" target="_blank"><i class="iconfont-13 icon-wen"></i> 图片私密性</a>
+								</p> 
+								<button type="button" data-id="image-modal" class="btn cancel">取消</button> 
+							</div> 
+							<div class="clearfix hide active" id="image-external"> 
+								<div class="input-div">
+									<span class="message"></span>  
+								</div>
+								<div class="input-div"> 
+									<span class="icon"><i class="iconfont-14 icon-module-link"></i></span> 
+									<input class="input" name="image" placeholder="输入网络图片链接" type="text">
+								</div> 
+								<a class="switch" data-for="image-upload">或上传本地图片</a>
+								<p>
+									<a href="###" target="_blank"><i class="iconfont-13 icon-wen"></i> 图片私密性</a>
+								</p> 
+								<button type="button" data-id="image-modal" class="btn ok">确认</button> 
+								<button type="button" data-id="image-modal" class="btn cancel">取消</button> 
+							</div> 
+							<span class="message-text" style="display: none">上传中...</span> 
+							<img src="./images/loading.gif" class="lodaer loader-tiny hide"> 
+						</div> 
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="show-message"></div>
+<script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="./js/write.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

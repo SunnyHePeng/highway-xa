@@ -1,0 +1,45 @@
+
+<div class=" col-xs-12 col-sm-12 mt-10" class="padding-left: 0; ">
+    <div class="panel panel-info">
+        <div class="panel-body" class="padding: 0;">
+            <table id="table_list" class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th width="40" class="hidden-xs hidden-sm">序号</th>
+                    <th width="100">时间</th>
+                    <th width="100">项目</th>
+                    <th width="100" >合同段</th>
+
+                    <th width="100">报警数量</th>
+                    <th width="100">处理数量</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <?php if($data): ?>
+                    <?php foreach($data as$k=>$v): ?>
+                        <tr class="text-c">
+                          <td><?php if(isset($from)): ?><?php echo e($from++); ?><?php else: ?><?php echo e($k+1); ?><?php endif; ?></td>
+                          <td><?php echo e(date('Y-m-d',$v['time'])); ?></td>
+                          <td>
+                              <?php if($v['module_id']==3): ?>
+                                  试验室报警
+                              <?php elseif($v['module_id']==4): ?>
+                                  拌合站报警
+                              <?php endif; ?>
+                          </td>
+                            <td><?php echo e($v['section_name']); ?></td>
+                          <td><?php echo e($v['bj_num']); ?></td>
+                          <td><?php echo e($v['cl_num']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
+                </tbody>
+            </table>
+            <?php if(isset($last_page) && !array_key_exists('d',$search)): ?>
+                <?php if($last_page>1): ?>
+                    <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

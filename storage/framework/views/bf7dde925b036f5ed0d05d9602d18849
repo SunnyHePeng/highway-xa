@@ -1,0 +1,69 @@
+<?php $__env->startSection('container'); ?>
+
+<div class="mt-10 dataTables_wrapper">
+	<table id="table_list" class="table table-border table-bordered table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="40" class="hidden-xs hidden-sm">序号</th>
+				<th width="40">状态</th>
+				<th width="100" class="hidden-xs hidden-sm hidden-md">监理名称</th>
+				<th width="100">标段名称</th>
+				<th width="100">设备名称</th>
+				<th width="100">设备型号</th>
+				<th width="100">设备编码</th>
+				<th width="100">最新上报时间</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php if($data): ?>
+			<?php foreach($data as $value): ?>
+			<tr class="text-c">
+				<?php 
+					$status_info = json_decode(Cache::get('device_status_'.$value['id']), true);
+					if($status_info && $status_info['J1'] == 1){
+						$is_online = 1;
+						$status = '在线';
+					}else{
+						$is_online = 0;
+						$status = '离线';
+					}
+				?>
+				<td class="hidden-xs hidden-sm"><?php echo e($page_num++); ?></td>
+				<td><span class="label <?php if($is_online == 1): ?> label-success <?php else: ?> label-danger <?php endif; ?> radius"><?php echo e($status); ?></span></td>
+				<td class="hidden-xs hidden-sm hidden-md"><?php echo e($value['sup']['name']); ?></td>
+				<td><?php echo e($value['section']['name']); ?></td>
+				<td><?php echo e($value['name']); ?></td>
+				<td><?php echo e($value['model']); ?></td>
+				<td><?php echo e($value['dcode']); ?></td>
+				<td><?php if($value['last_time']): ?><?php echo e(date('Y-m-d H:i:s', $value['last_time'])); ?><?php endif; ?></td>
+				<td class="f-14 product-brand-manage td-manage"> 
+				  	<a style="text-decoration:none" class="mt-5 ml-5 open-iframe btn btn-secondary radius size-MINI" href="javascript:;" data-title="<?php echo e($value['section']['name']); ?>-<?php echo e($value['name']); ?> 拌和数据" data-url="<?php echo e(url('snbhz/product_data_info/'.$value['id'].'?pro_id='.$value['project_id'])); ?>">拌和数据</a>
+          		</td>
+			</tr>
+			<?php endforeach; ?>
+			<?php endif; ?>
+		</tbody>
+	</table>
+	<?php if($last_page > 1): ?>
+	    <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php endif; ?>
+</div>
+
+<input type="hidden" value="<?php echo e($ztree_data); ?>" id="tree_data">
+<input type="hidden" value="<?php echo e($ztree_name); ?>" id="tree_name">
+<input type="hidden" value="<?php echo e($ztree_url); ?>" id="tree_url">
+<input type="hidden" value="" id="tree_page">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/lib/zTree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/common.js"></script>
+<script type="text/javascript" src="/static/admin/js/ztree_page.js"></script>
+<script type="text/javascript">
+
+list.init();
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.tree', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

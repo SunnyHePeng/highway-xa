@@ -1,0 +1,58 @@
+<?php $__env->startSection('container'); ?>
+<div class="mt-10 dataTables_wrapper">
+	<table id="table_list" class="table table-border table-bordered table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="40" class="hidden-xs hidden-sm">序号</th>
+				<th width="100">监理名称</th>
+				<th width="100">标段名称</th>
+				<th width="100">设备名称</th>
+				<th width="100">设备型号</th>
+				<th width="100">设备编码</th>
+				<th width="100" class="hidden-xs hidden-sm hidden-md">生产厂家</th>
+				<th width="100" class="hidden-xs hidden-sm hidden-md">出厂日期</th>
+				<th width="100" class="hidden-xs hidden-sm">负责人</th>
+				<th width="100" class="hidden-xs hidden-sm">联系方式</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php if($data): ?>
+			<?php foreach($data as $value): ?>
+			<tr class="text-c">
+				<td class="hidden-xs hidden-sm"><?php echo e($page_num++); ?></td>
+				<td><?php echo e($value['sup']['name']); ?></td>
+				<td><?php echo e($value['section']['name']); ?></td>
+				<td><?php echo e($value['name']); ?></td>
+				<td><?php echo e($value['model']); ?></td>
+				<td><?php echo e($value['dcode']); ?></td>
+				<td class="hidden-xs hidden-sm hidden-md"><?php echo e($value['factory_name']); ?></td>
+				<td class="hidden-xs hidden-sm hidden-md"><?php echo e($value['factory_date']); ?></td>
+				<td class="hidden-xs hidden-sm"><?php echo e($value['fzr']); ?></td>
+				<td class="hidden-xs hidden-sm"><?php echo e($value['phone']); ?></td>
+			</tr>
+			<?php endforeach; ?>
+			<?php endif; ?>
+		</tbody>
+	</table>
+	<?php if($last_page > 1): ?>
+	    <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php endif; ?>
+</div>
+
+<input type="hidden" value="<?php echo e($ztree_data); ?>" id="tree_data">
+<input type="hidden" value="<?php echo e($ztree_name); ?>" id="tree_name">
+<input type="hidden" value="<?php echo e($ztree_url); ?>" id="tree_url">
+<input type="hidden" value="" id="tree_page">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/lib/zTree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/common.js"></script>
+<script type="text/javascript" src="/static/admin/js/ztree_page.js"></script>
+<script type="text/javascript">
+
+list.init();
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.tree', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,27 @@
+#table_list {
+	border: 1px solid #ddd;
+}
+#table_list tr td {
+	text-align: center;
+	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	width: 10%;
+}
+#table_list tr th {
+	border-left: 1px solid #ddd;
+}
+#table_list tr th.no-left, #table_list tr td.no-left {
+	border-left: none;
+}
+#table_list tr th.no-print {
+ 	display: none;
+}
+#table_list tr th:nth-child(3), #table_list tr th:nth-child(5){
+ 	width: 20%;
+}
+#table_list tr td.no-print {
+ 	display: none;
+}
+.table-bordered th, .table-bordered td {
+    border-left: 1px solid #ddd;
+}

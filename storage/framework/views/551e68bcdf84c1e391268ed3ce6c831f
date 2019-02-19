@@ -1,0 +1,1041 @@
+<style type="text/css" media="print">
+    .noprint{display : none}
+    .clearfix:after {
+        display: block;
+        visibility: hidden;
+        clear: both;
+        height: 0;
+        content: ".";
+    }
+    .clearfix {
+        zoom: 1;
+    }
+</style>
+<div class="cl pd-5 text-r noprint">
+    <span class="ml-10 export-file export-dy open-print" data-name="征地拆迁日工作台账" data-obj="table_list" data-type="dy"><a href="javascript:;" title="打印文件"><img src="/static/admin/images/dayin.svg"></a></span>
+</div>
+<!--startprint-->
+<h3 class="text-c" style="font-weight: 900;padding: 0;">西安外环高速公路南段项目征地拆迁日工作台账</h3>
+<h4 class="text-r" style="padding: 0;">日期：<?php echo e(date('Y-m-d',time())); ?></h4>
+<div class=" col-xs-pull-12 col-sm-pull-12" style="padding-left: 0;">
+    <div>
+        <div >
+            <table id="table_list" class="table table-border table-bordered">
+                <thead>
+                <tr class="text-c">
+                    <th width="50" rowspan="2" class="hidden-xs hidden-sm">所属区县</th>
+                    <th width="50" rowspan="2" class="hidden-xs hidden-sm" >所属乡镇</th>
+                    <th width="50" rowspan="2">施工标段</th>
+                    <th width="100" rowspan="2" class="hidden-xs hidden-sm">里程桩号</th>
+                    <th width="80" class="hidden-xs hidden-sm" rowspan="2">长度(KM)</th>
+                    <th width="200" colspan="4">用地</th>
+                    <th width="200" colspan="4">拆迁房屋(户)</th>
+                    <th width="600" colspan="12">电力通讯</th>
+                    <th width="400" colspan="8">地埋管道</th>
+                    <th width="200" colspan="4">特殊拆迁物(处)</th>
+                    <th rowspan="2" width="100" class="hidden-xs hidden-sm pl-0">备注</th>
+                </tr>
+                <tr class="text-c">
+                  <th width="50">总占地(亩)</th>
+                  <th width="50">交付</th>
+                  <th width="50">累计交付</th>
+                  <th width="50">剩余</th>
+                  <th width="50">总涉及</th>
+                  <th width="50">拆迁</th>
+                  <th width="50">累计拆除</th>
+                  <th width="50">剩余</th>
+                  <th width="50">铁塔(座)</th>
+                  <th width="50">迁改</th>
+                  <th width="50">累计迁改</th>
+                  <th width="50">剩余</th>
+                  <th width="50">双杆(处)</th>
+                  <th width="50">迁改</th>
+                  <th width="50">累计迁改</th>
+                  <th width="50">剩余</th>
+                  <th width="50">地埋光缆(米)</th>
+                  <th width="50">迁改</th>
+                  <th width="50">累计迁改</th>
+                  <th width="50">剩余</th>
+                  <th width="50">输水管道(米)</th>
+                  <th width="50">迁改</th>
+                  <th width="50">累计迁改</th>
+                  <th width="50">剩余</th>
+                  <th width="50">天然气管道</th>
+                  <th width="50">迁改</th>
+                  <th width="50">累计迁改</th>
+                  <th width="50">剩余</th>
+                  <th width="50">总数量(处)</th>
+                  <th width="50">拆除</th>
+                  <th width="50">累计拆除</th>
+                  <th width="50">剩余</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php /*长安区*/ ?>
+                  <?php if($gaoxin_data): ?>
+                    <?php foreach($gaoxin_data as $k=>$v): ?>
+                        <tr class="text-c">
+                           <?php if($k==0): ?>
+                              <td rowspan="4" class="hidden-xs hidden-sm"><?php echo e($v['district_name']); ?></td>
+                           <?php endif; ?>
+                              <td class="hidden-xs hidden-sm"><?php echo e($v['town_name']); ?></td>
+                              <td><?php echo e($v['section']['name']); ?></td>
+                              <td class="hidden-xs hidden-sm"><?php echo e($v['mileage_stake']); ?></td>
+                              <td class="hidden-xs hidden-sm"><?php echo e($v['length']); ?></td>
+                            <?php /*用地数据*/ ?>
+                                 <?php /*总量*/ ?>
+                              <td ><?php echo e($v['occupation_total']); ?></td>
+                                  <?php /*当日数据*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['occupation_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                                  <?php /*累计数据*/ ?>
+                              <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['occupation_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                              </td>
+                                   <?php /*剩余*/ ?>
+                              <td>
+                                 <?php if(array_key_exists('finish',$v)): ?>
+                                     <?php echo e($v['occupation_total']-$v['finish']['occupation_sum']); ?>
+
+                                 <?php else: ?>
+                                     <?php echo e($v['occupation_total']); ?>
+
+                                 <?php endif; ?>
+                              </td>
+                            <?php /*拆迁房屋*/ ?>
+                               <?php /*总量*/ ?>
+                               <td><?php echo e($v['house_total']); ?></td>
+                               <?php /*当日*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('now',$v)): ?>
+                                       <?php echo e($v['now']['house_day']); ?>
+
+                                   <?php else: ?>
+                                      0
+                                   <?php endif; ?>
+                               </td>
+                                <?php /*累计*/ ?>
+                               <td>
+                                 <?php if(array_key_exists('finish',$v)): ?>
+                                     <?php echo e($v['finish']['house_sum']); ?>
+
+                                 <?php else: ?>
+                                     0
+                                 <?php endif; ?>
+                               </td>
+                               <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['house_total']-$v['finish']['house_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['house_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                            <?php /*电力通讯*/ ?>
+                                <?php /*铁塔*/ ?>
+                                 <?php /*总量*/ ?>
+                              <td><?php echo e($v['pylon_total']); ?></td>
+                              <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['pylon_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['pylon_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                             <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['pylon_total']-$v['finish']['pylon_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['pylon_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                            <?php /*双杆*/ ?>
+                               <?php /*总量*/ ?>
+                              <td><?php echo e($v['parallels_total']); ?></td>
+                               <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['parallels_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                               <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['parallels_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['parallels_total']-$v['finish']['parallels_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['parallels_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                            <?php /*地埋光缆*/ ?>
+                               <?php /*总量*/ ?>
+                               <td><?php echo e($v['optical_cable_total']); ?></td>
+                               <?php /*当日*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('now',$v)): ?>
+                                       <?php echo e($v['now']['optical_cable_day']); ?>
+
+                                   <?php else: ?>
+                                       0
+                                   <?php endif; ?>
+                               </td>
+                               <?php /*累计*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('finish',$v)): ?>
+                                       <?php echo e($v['finish']['optical_cable_sum']); ?>
+
+                                   <?php else: ?>
+                                       0
+                                   <?php endif; ?>
+                               </td>
+                               <?php /*剩余*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('finish',$v)): ?>
+                                       <?php echo e($v['optical_cable_total']-$v['finish']['optical_cable_sum']); ?>
+
+                                   <?php else: ?>
+                                       <?php echo e($v['optical_cable_total']); ?>
+
+                                   <?php endif; ?>
+                               </td>
+                            <?php /*地埋管道*/ ?>
+                                <?php /*输水管道*/ ?>
+                                  <?php /*总量*/ ?>
+                               <td><?php echo e($v['water_pipe_total']); ?></td>
+                                  <?php /*当日*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['water_pipe_day']); ?>
+
+                                   <?php else: ?>
+                                       0
+                                   <?php endif; ?>
+                               </td>
+                                  <?php /*累计*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('finish',$v)): ?>
+                                       <?php echo e($v['finish']['water_pipe_sum']); ?>
+
+                                   <?php else: ?>
+                                       0
+                                   <?php endif; ?>
+                               </td>
+                                  <?php /*剩余*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('finish',$v)): ?>
+                                       <?php echo e($v['water_pipe_total']-$v['finish']['water_pipe_sum']); ?>
+
+                                   <?php else: ?>
+                                       <?php echo e($v['water_pipe_total']); ?>
+
+                                   <?php endif; ?>
+                               </td>
+                            <?php /*天然气管道*/ ?>
+                               <?php /*总量*/ ?>
+                               <td><?php echo e($v['natural_gas_pipeline_total']); ?></td>
+                               <?php /*当日*/ ?>
+                               <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                     <?php echo e($v['now']['natural_gas_pipeline_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                               </td>
+                                <?php /*累计*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['natural_gas_pipeline_sum']); ?>
+
+                                   <?php else: ?>
+                                       0
+                                   <?php endif; ?>
+                               </td>
+                                <?php /*剩余*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('finish',$v)): ?>
+                                       <?php echo e($v['natural_gas_pipeline_total']-$v['finish']['natural_gas_pipeline_sum']); ?>
+
+                                   <?php else: ?>
+                                       <?php echo e($v['natural_gas_pipeline_total']); ?>
+
+                                   <?php endif; ?>
+                               </td>
+                               <?php /*特殊拆除物*/ ?>
+                                   <?php /*总量*/ ?>
+                               <td><?php echo e($v['special_remove_total']); ?></td>
+                                   <?php /*当日*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('now',$v)): ?>
+                                       <?php echo e($v['now']['special_remove_day']); ?>
+
+                                   <?php else: ?>
+                                       0
+                                   <?php endif; ?>
+                               </td>
+                                   <?php /*累计*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('finish',$v)): ?>
+                                       <?php echo e($v['finish']['special_remove_sum']); ?>
+
+                                   <?php else: ?>
+                                       0
+                                   <?php endif; ?>
+                               </td>
+                                  <?php /*剩余*/ ?>
+                               <td>
+                                   <?php if(array_key_exists('finish',$v)): ?>
+                                       <?php echo e($v['special_remove_total']-$v['finish']['special_remove_sum']); ?>
+
+                                   <?php else: ?>
+                                       <?php echo e($v['special_remove_total']); ?>
+
+                                   <?php endif; ?>
+                               </td>
+                               <?php /*备注*/ ?>
+                               <td class="hidden-xs hidden-sm">
+                                   <?php if(array_key_exists('now',$v)): ?>
+                                       <?php echo e($v['now']['remark']); ?>
+
+                                   <?php endif; ?>
+                               </td>
+                        </tr>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
+                <?php /*占空行*/ ?>
+                <tr class="hidden-xs hidden-sm">
+                    <td colspan="3" height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="hidden-xs hidden-sm"></td>
+                </tr>
+                <?php /*长安区*/ ?>
+                  <?php if($changan_data): ?>
+                      <?php foreach($changan_data as $k=>$v): ?>
+                          <tr class="text-c">
+                              <?php if($k==0): ?>
+                                  <td rowspan="6" class="hidden-xs hidden-sm"><?php echo e($v['district_name']); ?></td>
+                              <?php endif; ?>
+                              <td class="hidden-xs hidden-sm"><?php echo e($v['town_name']); ?></td>
+                              <td ><?php echo e($v['section']['name']); ?></td>
+                              <td class="hidden-xs hidden-sm"><?php echo e($v['mileage_stake']); ?></td>
+                              <td class="hidden-xs hidden-sm"><?php echo e($v['length']); ?></td>
+                              <?php /*用地数据*/ ?>
+                              <?php /*总量*/ ?>
+                              <td><?php echo e($v['occupation_total']); ?></td>
+                              <?php /*当日数据*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['occupation_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计数据*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['occupation_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['occupation_total']-$v['finish']['occupation_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['occupation_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*拆迁房屋*/ ?>
+                              <?php /*总量*/ ?>
+                              <td><?php echo e($v['house_total']); ?></td>
+                              <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['house_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['house_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['house_total']-$v['finish']['house_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['house_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*电力通讯*/ ?>
+                              <?php /*铁塔*/ ?>
+                              <?php /*总量*/ ?>
+                              <td><?php echo e($v['pylon_total']); ?></td>
+                              <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['pylon_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['pylon_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['pylon_total']-$v['finish']['pylon_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['pylon_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*双杆*/ ?>
+                              <?php /*总量*/ ?>
+                              <td><?php echo e($v['parallels_total']); ?></td>
+                              <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['parallels_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['parallels_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['parallels_total']-$v['finish']['parallels_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['parallels_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*地埋光缆*/ ?>
+                              <?php /*总量*/ ?>
+                              <td><?php echo e($v['optical_cable_total']); ?></td>
+                              <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['optical_cable_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['optical_cable_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['optical_cable_total']-$v['finish']['optical_cable_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['optical_cable_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*地埋管道*/ ?>
+                              <?php /*输水管道*/ ?>
+                              <?php /*总量*/ ?>
+                              <td><?php echo e($v['water_pipe_total']); ?></td>
+                              <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['water_pipe_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['water_pipe_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['water_pipe_total']-$v['finish']['water_pipe_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['water_pipe_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*天然气管道*/ ?>
+                              <?php /*总量*/ ?>
+                              <td><?php echo e($v['natural_gas_pipeline_total']); ?></td>
+                              <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['natural_gas_pipeline_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['natural_gas_pipeline_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['natural_gas_pipeline_total']-$v['finish']['natural_gas_pipeline_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['natural_gas_pipeline_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*特殊拆除物*/ ?>
+                              <?php /*总量*/ ?>
+                              <td><?php echo e($v['special_remove_total']); ?></td>
+                              <?php /*当日*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['special_remove_day']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*累计*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['finish']['special_remove_sum']); ?>
+
+                                  <?php else: ?>
+                                      0
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*剩余*/ ?>
+                              <td>
+                                  <?php if(array_key_exists('finish',$v)): ?>
+                                      <?php echo e($v['special_remove_total']-$v['finish']['special_remove_sum']); ?>
+
+                                  <?php else: ?>
+                                      <?php echo e($v['special_remove_total']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                              <?php /*备注*/ ?>
+                              <td class="hidden-xs hidden-sm">
+                                  <?php if(array_key_exists('now',$v)): ?>
+                                      <?php echo e($v['now']['remark']); ?>
+
+                                  <?php endif; ?>
+                              </td>
+                          </tr>
+                      <?php endforeach; ?>
+                  <?php endif; ?>
+                  <?php /*占空行*/ ?>
+                <tr class="hidden-xs hidden-sm">
+                    <td colspan="3" height="20"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="hidden-xs hidden-sm"></td>
+                </tr>
+                   <?php /*蓝田县*/ ?>
+                <?php if($lantian_data): ?>
+                    <?php foreach($lantian_data as $k=>$v): ?>
+                        <tr class="text-c">
+                            <?php if($k==0): ?>
+                                <td rowspan="7" class="hidden-xs hidden-sm"><?php echo e($v['district_name']); ?></td>
+                            <?php endif; ?>
+                            <td class="hidden-xs hidden-sm"><?php echo e($v['town_name']); ?></td>
+                            <td><?php echo e($v['section']['name']); ?></td>
+                            <td class="hidden-xs hidden-sm"><?php echo e($v['mileage_stake']); ?></td>
+                            <td class="hidden-xs hidden-sm"><?php echo e($v['length']); ?></td>
+                            <?php /*用地数据*/ ?>
+                            <?php /*总量*/ ?>
+                            <td><?php echo e($v['occupation_total']); ?></td>
+                            <?php /*当日数据*/ ?>
+                            <td>
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['occupation_day']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*累计数据*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['occupation_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*剩余*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['occupation_total']-$v['finish']['occupation_sum']); ?>
+
+                                <?php else: ?>
+                                    <?php echo e($v['occupation_total']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                            <?php /*拆迁房屋*/ ?>
+                            <?php /*总量*/ ?>
+                            <td><?php echo e($v['house_total']); ?></td>
+                            <?php /*当日*/ ?>
+                            <td>
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['house_day']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*累计*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['house_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*剩余*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['house_total']-$v['finish']['house_sum']); ?>
+
+                                <?php else: ?>
+                                    <?php echo e($v['house_total']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                            <?php /*电力通讯*/ ?>
+                            <?php /*铁塔*/ ?>
+                            <?php /*总量*/ ?>
+                            <td><?php echo e($v['pylon_total']); ?></td>
+                            <?php /*当日*/ ?>
+                            <td>
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['pylon_day']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*累计*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['pylon_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*剩余*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['pylon_total']-$v['finish']['pylon_sum']); ?>
+
+                                <?php else: ?>
+                                    <?php echo e($v['pylon_total']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                            <?php /*双杆*/ ?>
+                            <?php /*总量*/ ?>
+                            <td><?php echo e($v['parallels_total']); ?></td>
+                            <?php /*当日*/ ?>
+                            <td>
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['parallels_day']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*累计*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['parallels_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*剩余*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['parallels_total']-$v['finish']['parallels_sum']); ?>
+
+                                <?php else: ?>
+                                    <?php echo e($v['parallels_total']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                            <?php /*地埋光缆*/ ?>
+                            <?php /*总量*/ ?>
+                            <td><?php echo e($v['optical_cable_total']); ?></td>
+                            <?php /*当日*/ ?>
+                            <td>
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['optical_cable_day']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*累计*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['optical_cable_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*剩余*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['optical_cable_total']-$v['finish']['optical_cable_sum']); ?>
+
+                                <?php else: ?>
+                                    <?php echo e($v['optical_cable_total']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                            <?php /*地埋管道*/ ?>
+                            <?php /*输水管道*/ ?>
+                            <?php /*总量*/ ?>
+                            <td><?php echo e($v['water_pipe_total']); ?></td>
+                            <?php /*当日*/ ?>
+                            <td>
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['water_pipe_day']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*累计*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['water_pipe_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*剩余*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['water_pipe_total']-$v['finish']['water_pipe_sum']); ?>
+
+                                <?php else: ?>
+                                    <?php echo e($v['water_pipe_total']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                            <?php /*天然气管道*/ ?>
+                            <?php /*总量*/ ?>
+                            <td><?php echo e($v['natural_gas_pipeline_total']); ?></td>
+                            <?php /*当日*/ ?>
+                            <td>
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['natural_gas_pipeline_day']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*累计*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['natural_gas_pipeline_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*剩余*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['natural_gas_pipeline_total']-$v['finish']['natural_gas_pipeline_sum']); ?>
+
+                                <?php else: ?>
+                                    <?php echo e($v['natural_gas_pipeline_total']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                            <?php /*特殊拆除物*/ ?>
+                            <?php /*总量*/ ?>
+                            <td><?php echo e($v['special_remove_total']); ?></td>
+                            <?php /*当日*/ ?>
+                            <td>
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['special_remove_day']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*累计*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['finish']['special_remove_sum']); ?>
+
+                                <?php else: ?>
+                                    0
+                                <?php endif; ?>
+                            </td>
+                            <?php /*剩余*/ ?>
+                            <td>
+                                <?php if(array_key_exists('finish',$v)): ?>
+                                    <?php echo e($v['special_remove_total']-$v['finish']['special_remove_sum']); ?>
+
+                                <?php else: ?>
+                                    <?php echo e($v['special_remove_total']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                            <?php /*备注*/ ?>
+                            <td class="hidden-xs hidden-sm">
+                                <?php if(array_key_exists('now',$v)): ?>
+                                    <?php echo e($v['now']['remark']); ?>
+
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <?php /*合计*/ ?>
+                <tr class="text-c hidden-xs hidden-sm">
+                    <td colspan="5">合计</td>
+                     <?php /*用地总占地合计*/ ?>
+                    <td><?php echo e($amount['occupation_total_amount']); ?></td>
+                     <?php /*用地当日交付合计*/ ?>
+                    <td><?php echo e($amount['occupation_day_amount']); ?></td>
+                    <?php /*用地累计交付合计*/ ?>
+                    <td><?php echo e($amount['occupation_finish_amount']); ?></td>
+                    <?php /*用地剩余交付合计*/ ?>
+                    <td><?php echo e($amount['occupation_total_amount']-$amount['occupation_finish_amount']); ?></td>
+                    <?php /*拆迁房屋总量合计*/ ?>
+                    <td><?php echo e($amount['house_total_amount']); ?></td>
+                    <?php /*拆迁房屋当日数据合计*/ ?>
+                    <td><?php echo e($amount['house_day_amount']); ?></td>
+                    <?php /*拆迁房屋累计合计*/ ?>
+                    <td><?php echo e($amount['house_finish_amount']); ?></td>
+                    <?php /*拆迁房屋剩余合计*/ ?>
+                    <td><?php echo e($amount['house_total_amount']-$amount['house_finish_amount']); ?></td>
+                    <?php /*铁塔迁改总量合计*/ ?>
+                    <td><?php echo e($amount['pylon_total_amount']); ?></td>
+                    <?php /*铁塔迁改今日数据合计*/ ?>
+                    <td><?php echo e($amount['pylon_day_amount']); ?></td>
+                    <?php /*铁塔迁改累计数据合计*/ ?>
+                    <td><?php echo e($amount['pylon_finish_amount']); ?></td>
+                    <?php /*铁塔迁改剩余数据合计*/ ?>
+                    <td><?php echo e($amount['pylon_total_amount']-$amount['pylon_finish_amount']); ?></td>
+                    <?php /*双杆迁改总量合计*/ ?>
+                    <td><?php echo e($amount['parallels_total_amount']); ?></td>
+                    <?php /*双杆迁改今日数据合计*/ ?>
+                    <td><?php echo e($amount['parallels_day_amount']); ?></td>
+                    <?php /*双杆迁改累计数据合计*/ ?>
+                    <td><?php echo e($amount['parallels_finish_amount']); ?></td>
+                    <?php /*双杆迁改剩余数据合计*/ ?>
+                    <td><?php echo e($amount['parallels_total_amount']-$amount['parallels_finish_amount']); ?></td>
+                    <?php /*地埋电缆总量合计*/ ?>
+                    <td><?php echo e($amount['optical_cable_total_amount']); ?></td>
+                    <?php /*地埋电缆当日数据合计*/ ?>
+                    <td><?php echo e($amount['optical_cable_day_amount']); ?></td>
+                     <?php /*地埋电缆累计数据合计*/ ?>
+                    <td><?php echo e($amount['optical_cable_finish_amount']); ?></td>
+                    <?php /*地埋电缆剩余数据合计*/ ?>
+                    <td><?php echo e($amount['optical_cable_total_amount']-$amount['optical_cable_finish_amount']); ?></td>
+                    <?php /*输水管道总量合计*/ ?>
+                    <td><?php echo e($amount['water_pipe_total_amount']); ?></td>
+                    <?php /*输水管道当日数据合计*/ ?>
+                    <td><?php echo e($amount['water_pipe_day_amount']); ?></td>
+                    <?php /*输水管道累计数据合计*/ ?>
+                    <td><?php echo e($amount['water_pipe_finish_amount']); ?></td>
+                    <?php /*输水管道剩余数据合计*/ ?>
+                    <td><?php echo e($amount['water_pipe_total_amount']-$amount['water_pipe_finish_amount']); ?></td>
+                    <?php /*天然气管道总量合计*/ ?>
+                    <td><?php echo e($amount['natural_gas_pipeline_total_amount']); ?></td>
+                     <?php /*天然气管道当日数据合计*/ ?>
+                    <td><?php echo e($amount['natural_gas_pipeline_day_amount']); ?></td>
+                    <?php /*天然气管道累计数据合计*/ ?>
+                    <td><?php echo e($amount['natural_gas_pipeline_finish_amount']); ?></td>
+                    <?php /*天然气管道剩余数据合计*/ ?>
+                    <td><?php echo e($amount['natural_gas_pipeline_total_amount']-$amount['natural_gas_pipeline_finish_amount']); ?></td>
+                    <?php /*特殊拆除物总量合计*/ ?>
+                    <td><?php echo e($amount['special_remove_total_amount']); ?></td>
+                    <?php /*特殊拆除物当日数据合计*/ ?>
+                    <td><?php echo e($amount['special_remove_day_amount']); ?></td>
+                    <?php /*特殊拆除物累计数据合计*/ ?>
+                    <td><?php echo e($amount['special_remove_finish_amount']); ?></td>
+                    <?php /*特殊拆除物剩余数据合计*/ ?>
+                    <td><?php echo e($amount['special_remove_total_amount']-$amount['special_remove_finish_amount']); ?></td>
+                    <td class="hidden-xs hidden-sm"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<!--endprint-->

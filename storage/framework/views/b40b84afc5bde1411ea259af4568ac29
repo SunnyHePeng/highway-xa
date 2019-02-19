@@ -1,0 +1,141 @@
+<?php $__env->startSection('container'); ?>
+<div>
+	<form id="search_form" data="pro_id,name,lxr" method="get" data-url="<?php echo e(url('manage/section?pro_id='.$search['pro_id'])); ?>">
+	  	<!-- 建设项目：
+	  	<span class="select-box inline">
+	  		<select name="pro_id" id="pro_id" class="select select2">
+                <?php if(isset($project)): ?>
+                <?php foreach($project as $k=>$v): ?>
+                <option value="<?php echo e($v['id']); ?>" <?php if(isset($search['pro_id']) && $search['pro_id'] == $v['id']): ?> selected <?php endif; ?>><?php echo e($v['name']); ?></option>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+        </span> --> 
+        <input type="hidden" name="pro_id" id="pro_id" value="<?php echo e($search['pro_id']); ?>">
+        <input type="text" name="name" id="name" placeholder="请输入标段名称" class="input-text search-input" value="<?php if(isset($search['name']) && $search['name']): ?><?php echo e($search['name']); ?><?php endif; ?>">
+        <input type="text" name="lxr" id="lxr" placeholder="请输入负责人" class="input-text search-input" value="<?php if(isset($search['lxr']) && $search['lxr']): ?><?php echo e($search['lxr']); ?><?php endif; ?>">
+    	<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont"></i> 搜索</button>
+    </form>
+</div>
+<?php if($user_is_act): ?>
+<div class="cl mt-10"> 
+	<span class="l">
+		<a class="btn btn-primary radius add-r" data-for="section" data-title="添加标段" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>添加标段</a>
+	</span>
+</div>
+<?php endif; ?>
+<div class="mt-10 dataTables_wrapper">
+	<table id="table_list" class="table table-border table-bordered table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="40">序号</th>
+				<th width="80">标段名称</th>
+				<th width="80">项目名称</th>
+				<th width="80">监理名称</th>
+				<th width="50" class="hidden-xs hidden-sm">起始桩号</th>
+				<th width="50" class="hidden-xs hidden-sm">终止桩号</th>
+				<th width="80">承包商名称</th>
+				<!-- <th width="50" class="hidden-xs hidden-sm hidden-md">拌合站数量</th>
+				<th width="50" class="hidden-xs hidden-sm hidden-md">梁场数量</th>
+				<th width="50" class="hidden-xs hidden-sm hidden-md">隧道数量</th> -->
+				<th width="80" class="hidden-xs hidden-sm">负责人</th>
+				<th width="80" class="hidden-xs hidden-sm">联系方式</th>
+				<th width="80" class="hidden-xs hidden-sm">登记时间</th>
+				<th width="120">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php if($data): ?>
+			<?php foreach($data as $value): ?>
+			<tr class="text-c" id="list-<?php echo e($value['id']); ?>">
+				<td><?php echo e($page_num++); ?></td>
+				<td class="text-l"><?php echo e($value['name']); ?></td>
+				<td class="text-l"><?php echo e($value['project']['name']); ?></td>
+				<td class="text-l"><?php if(isset($value['sup'][0]['name'])): ?><?php echo e($value['sup'][0]['name']); ?><?php endif; ?></td>
+				<td class="hidden-xs hidden-sm"><?php echo e($value['begin_position']); ?></td>
+				<td class="hidden-xs hidden-sm"><?php echo e($value['end_position']); ?></td>
+				<td><?php echo e($value['cbs_name']); ?></td>
+				<!-- <td class="hidden-xs hidden-sm hidden-md"><?php echo e($value['bhz_num']); ?></td>
+				<td class="hidden-xs hidden-sm hidden-md"><?php echo e($value['lc_num']); ?></td>
+				<td class="hidden-xs hidden-sm hidden-md"><?php echo e($value['sd_num']); ?></td> -->
+				<td class="hidden-xs hidden-sm"><?php echo e($value['fzr']); ?></td>
+				<td class="hidden-xs hidden-sm"><?php echo e($value['phone']); ?></td>
+				<td class="hidden-xs hidden-sm"><?php echo e(date('Y-m-d', $value['created_at'])); ?></td>
+				<td class="f-14 td-manage">
+					<?php if($user_is_act): ?>
+					<a style="text-decoration:none" class="mt-5 edit-r btn btn-secondary radius size-MINI" data-for="section" data-title="编辑标段" data-url="<?php echo e(url('manage/section/'.$value['id'].'/edit')); ?>" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
+					<a style="text-decoration:none" class="mt-5 ml-5 del-r btn btn-danger radius size-MINI" href="javascript:;" data-id="<?php echo e($value['id']); ?>" data-url="<?php echo e(url('manage/section/'.$value['id'])); ?>" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
+					<?php endif; ?>
+					<!-- <a style="text-decoration:none" class="mt-5 ml-5 open-iframe btn btn-success radius size-MINI" href="javascript:;" data-title="拌合站信息" data-url="<?php echo e(url('manage/mixplant?sec_id='.$value['id'])); ?>">拌合站</a>
+					<a style="text-decoration:none" class="mt-5 ml-5 open-iframe btn btn-success radius size-MINI" href="javascript:;" data-title="梁场信息" data-url="<?php echo e(url('manage/beamfield?sec_id='.$value['id'])); ?>">梁场</a>
+					<a style="text-decoration:none" class="mt-5 ml-5 open-iframe btn btn-success radius size-MINI" href="javascript:;" data-title="隧道信息" data-url="<?php echo e(url('manage/tunnel?sec_id='.$value['id'])); ?>">隧道</a> -->
+				</td>
+			</tr>
+			<?php endforeach; ?>
+			<?php endif; ?>
+		</tbody>
+	</table>
+	<?php if($last_page > 1): ?>
+	    <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php endif; ?>
+</div>
+
+<input type="hidden" value="<?php echo e($ztree_data); ?>" id="tree_data">
+<input type="hidden" value="<?php echo e($ztree_name); ?>" id="tree_name">
+<input type="hidden" value="<?php echo e(url('manage/section')); ?>" id="tree_url">
+<input type="hidden" value="section" id="tree_page">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('layer'); ?>
+<?php echo $__env->make('admin.project.section_edit', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/lib/zTree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/common.js"></script>
+<script type="text/javascript" src="/static/admin/js/ztree_page.js"></script>
+<script type="text/javascript">
+list.init();
+
+$('#form_container #project_id').on('change', function(){
+  var val = $(this).val();
+  if(val){
+  	var data = {
+        'pro_id': val
+      };
+    setOption($(this).attr('data-url'), data, 'name');
+  }
+});
+
+function setOption(url, data, id){
+  $.ajax({
+    url: url,
+        type: 'POST',
+        data: data,
+        dataType: 'json',
+        success:function(msg){
+          var str = '';
+          if(msg.status){
+            str = '<option value="0">请选择标段</option>';
+            data = msg.data;
+            if(data.length > 0){
+              for(var i in data){
+                str += '<option value="'+data[i]['name']+'" data-id="'+data[i]['id']+'">'+data[i]['name']+'</option>';
+              }
+            }
+            $('#form_container #'+id).html('').append(str);
+          }
+        },
+        error: function(){
+          common.alert('获取信息出错...');
+        }
+  })
+}
+
+$('#form_container #name').on('change', function(){
+	$('#form_container #psection_id').val($('#form_container #name option:selected').attr('data-id'));
+});
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.tree', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

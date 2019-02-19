@@ -1,0 +1,80 @@
+<?php $__env->startSection('container'); ?>
+    <link href="/lib/My97DatePicker/4.8/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+
+    <div class="text-c">
+        <form id="search_form" data="data_type,start_date,end_date" method="get" data-url="<?php echo e(url('yj/yj_data_info/'.$d_id)); ?>">
+            选择数据类型
+            <span class="select-box" style="width:auto; padding: 3px 5px;">
+            <select name="data_type" id="data_type" class="select select2">
+                <?php if(isset($data_type)): ?>
+                    <?php foreach($data_type as $k=>$v): ?>
+                        <option value="<?php echo e($k); ?>" <?php if(isset($search['data_type']) && $search['data_type'] == $k): ?> selected <?php endif; ?>><?php echo e($v); ?></option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+        </span>
+            日期范围：
+            <input name="start_date" placeholder="请输入开始时间" value="<?php if(isset($search['start_date']) && $search['start_date']): ?><?php echo e($search['start_date']); ?><?php endif; ?>" type="text" onfocus="WdatePicker()" id="start_date" class="input-text Wdate">
+            -
+            <input name="end_date" placeholder="请输入结束时间" value="<?php if(isset($search['end_date']) && $search['end_date']): ?><?php echo e($search['end_date']); ?><?php endif; ?>" type="text" onfocus="WdatePicker()" id="end_date" class="input-text Wdate">
+            <input type="hidden" value="<?php echo e($pro_id); ?>" name="pro_id">
+            <input type="hidden" value="<?php echo e($cat_id); ?>" name="cat_id">
+            <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont"></i> 搜索</button>
+        </form>
+    </div>
+
+    <div class="mt-10 dataTables_wrapper">
+        <table id="table_list" data-url="<?php echo e(url('lab/detail_info')); ?>" class="table table-border table-bordered table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="70">序号</th>
+                <th width="70">压浆时间</th>
+                <th width="100" class="hidden-xs">标段</th>
+                <th width="100" class="hidden-xs">监理单位</th>
+                <th width="100" class="hidden-xs">施工单位</th>
+                <th width="100">梁号</th>
+                <th width="100" class="hidden-xs">操作人员</th>
+                <th width="130">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if($data): ?>
+                <?php foreach($data as $value): ?>
+
+                    <tr class="text-c open-iframe " data-title="详细信息" data-url="<?php echo e(url('zlyj/zlyj_data_detail?id='.$value['id'].'&cat_id='.$value['device_cat'])); ?>" id="list-<?php echo e($value['id']); ?>">
+                        <td><?php echo e($page_num++); ?></td>
+                        <td><?php echo e(date('Y-m-d H:i:s', $value['time'])); ?></td>
+                        <td class="hidden-xs"><?php echo e($value['section']['name']); ?></td>
+                        <td class="hidden-xs"><?php echo e($value['jldw']); ?></td>
+                        <td class="hidden-xs"><?php echo e($value['sgdw']); ?></td>
+                        <td><?php echo e($value['yjlh']); ?></td>
+                        <td><?php echo e($value['czry']); ?></td>
+                        <td class="f-14 product-brand-manage td-manage">
+                            <a style="text-decoration:none" class="mt-5 ml-5 btn btn-secondary radius size-MINI show-report open-iframe" data-title="详细信息" data-url="<?php echo e(url('yj/yj_data_detail?id='.$value['id'].'&cat_id='.$value['device_cat'])); ?>">详细信息</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            </tbody>
+        </table>
+        <?php if($last_page > 1): ?>
+            <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php endif; ?>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+    <script type="text/javascript" src="/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+    <script type="text/javascript" src="/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/common.js"></script>
+
+    <script type="text/javascript">
+        list.init();
+
+        $('.show-report').on('click', function (event) {
+            event.stopPropagation();
+        });
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.iframe', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

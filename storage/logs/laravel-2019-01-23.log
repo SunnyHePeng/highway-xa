@@ -1,0 +1,68 @@
+[2019-01-23 15:55:03] local.INFO: acquire  today weather data and save start  
+[2019-01-23 15:55:05] local.INFO: acquire today weather success  
+[2019-01-23 15:55:05] local.INFO: today weather data save success  
+[2019-01-23 15:55:05] local.INFO: acquire today weather data and save end  
+[2019-01-23 17:51:48] local.ERROR: InvalidArgumentException: Command "session:clear" is not defined.
+
+Did you mean one of these?
+    config:clear
+    route:clear
+    view:clear
+    cache:clear
+    auth:clear-resets
+    session:table in D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php:519
+Stack trace:
+#0 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php(187): Symfony\Component\Console\Application->find('session:clear')
+#1 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php(121): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 D:\Laragon\www\admin\highway-xa-qs\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#4 {main}  
+[2019-01-23 17:54:51] local.ERROR: PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'road.migrations' doesn't exist in D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Connection.php:319
+Stack trace:
+#0 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Connection.php(319): PDO->prepare('select max(`bat...')
+#1 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Connection.php(655): Illuminate\Database\Connection->Illuminate\Database\{closure}(Object(Illuminate\Database\MySqlConnection), 'select max(`bat...', Array)
+#2 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Connection.php(618): Illuminate\Database\Connection->runQueryCallback('select max(`bat...', Array, Object(Closure))
+#3 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Connection.php(324): Illuminate\Database\Connection->run('select max(`bat...', Array, Object(Closure))
+#4 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1431): Illuminate\Database\Connection->select('select max(`bat...', Array, true)
+#5 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1408): Illuminate\Database\Query\Builder->runSelect()
+#6 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1738): Illuminate\Database\Query\Builder->get(Array)
+#7 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1682): Illuminate\Database\Query\Builder->aggregate('max', Array)
+#8 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Migrations\DatabaseMigrationRepository.php(110): Illuminate\Database\Query\Builder->max('batch')
+#9 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Migrations\DatabaseMigrationRepository.php(63): Illuminate\Database\Migrations\DatabaseMigrationRepository->getLastBatchNumber()
+#10 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migrator.php(158): Illuminate\Database\Migrations\DatabaseMigrationRepository->getLast()
+#11 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations\RollbackCommand.php(63): Illuminate\Database\Migrations\Migrator->rollback(false)
+#12 [internal function]: Illuminate\Database\Console\Migrations\RollbackCommand->fire()
+#13 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Container\Container.php(507): call_user_func_array(Array, Array)
+#14 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Console\Command.php(150): Illuminate\Container\Container->call(Array)
+#15 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Command\Command.php(254): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#16 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Console\Command.php(136): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#17 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php(847): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#18 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php(190): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Database\Console\Migrations\RollbackCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#19 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php(121): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#20 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#21 D:\Laragon\www\admin\highway-xa-qs\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#22 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'road.migrations' doesn't exist (SQL: select max(`batch`) as aggregate from `migrations`) in D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Connection.php:662
+Stack trace:
+#0 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Connection.php(618): Illuminate\Database\Connection->runQueryCallback('select max(`bat...', Array, Object(Closure))
+#1 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Connection.php(324): Illuminate\Database\Connection->run('select max(`bat...', Array, Object(Closure))
+#2 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1431): Illuminate\Database\Connection->select('select max(`bat...', Array, true)
+#3 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1408): Illuminate\Database\Query\Builder->runSelect()
+#4 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1738): Illuminate\Database\Query\Builder->get(Array)
+#5 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1682): Illuminate\Database\Query\Builder->aggregate('max', Array)
+#6 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Migrations\DatabaseMigrationRepository.php(110): Illuminate\Database\Query\Builder->max('batch')
+#7 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Migrations\DatabaseMigrationRepository.php(63): Illuminate\Database\Migrations\DatabaseMigrationRepository->getLastBatchNumber()
+#8 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migrator.php(158): Illuminate\Database\Migrations\DatabaseMigrationRepository->getLast()
+#9 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Database\Console\Migrations\RollbackCommand.php(63): Illuminate\Database\Migrations\Migrator->rollback(false)
+#10 [internal function]: Illuminate\Database\Console\Migrations\RollbackCommand->fire()
+#11 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Container\Container.php(507): call_user_func_array(Array, Array)
+#12 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Console\Command.php(150): Illuminate\Container\Container->call(Array)
+#13 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Command\Command.php(254): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#14 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Console\Command.php(136): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#15 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php(847): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#16 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php(190): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Database\Console\Migrations\RollbackCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#17 D:\Laragon\www\admin\highway-xa-qs\vendor\symfony\console\Application.php(121): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#18 D:\Laragon\www\admin\highway-xa-qs\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#19 D:\Laragon\www\admin\highway-xa-qs\artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#20 {main}  

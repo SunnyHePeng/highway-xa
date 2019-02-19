@@ -1,0 +1,119 @@
+<?php $__env->startSection('container'); ?>
+<style type="text/css">
+.blue-line, .blue-line td, .blue-line th{color: blue;}
+</style>
+<link href="/lib/My97DatePicker/4.8/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+
+<div>
+  <form id="search_form" data="data_type,start_date,end_date" method="get" data-url="<?php echo e(url('snbhz/product_data_info/'.$d_id)); ?>">
+        选择数据类型
+      <span class="select-box" style="width:auto; padding: 3px 5px;">
+        <select name="data_type" id="data_type" class="select select2">
+                <?php if(isset($data_type)): ?>
+                <?php foreach($data_type as $k=>$v): ?>
+                <option value="<?php echo e($k); ?>" <?php if(isset($search['data_type']) && $search['data_type'] == $k): ?> selected <?php endif; ?>><?php echo e($v); ?></option>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+        </span>
+        日期范围：
+        <input name="start_date" placeholder="请输入开始时间" value="<?php if(isset($search['start_date']) && $search['start_date']): ?><?php echo e($search['start_date']); ?><?php endif; ?>" type="text" onfocus="WdatePicker()" id="start_date" class="input-text Wdate">
+        -
+        <input name="end_date" placeholder="请输入结束时间" value="<?php if(isset($search['end_date']) && $search['end_date']): ?><?php echo e($search['end_date']); ?><?php endif; ?>" type="text" onfocus="WdatePicker()" id="end_date" class="input-text Wdate">
+        <input type="hidden" value="<?php echo e($pro_id); ?>" name="pro_id">
+        <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont"></i> 搜索</button>   
+  </form>
+</div>
+
+<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+  <!-- <span class="l">
+    <?php if($user['role'] ==3 || $user['role'] ==4 || $user['role'] ==5): ?>
+    <a class="btn btn-primary radius edit-r-more hidden-xs" data-for="module" data-title="处理拌合数据" data-url="<?php echo e(url('snbhz/deal/0')); ?>" href="javascript:;">批处理</a>
+    <?php endif; ?>
+  </span> -->
+  <span class="l ml-10 pt-5 c-error">
+    点击表格行显示对应物料和处理信息
+  </span>
+</div>
+
+<div class="mt-10 dataTables_wrapper">
+  <table id="table_list" data-url="<?php echo e(url('snbhz/detail_info')); ?>" class="table table-border table-bordered table-bg table-sort">
+    <thead>
+      <tr class="text-c">
+        <th width="70">序号</th>                
+        <th width="130">生产时间</th>
+        <th width="100" class="hidden-xs hidden-sm">监理</th>
+        <th width="100">标段</th>
+        <th width="100" class="hidden-xs">生产单位</th>
+        <th width="100">施工地点</th>
+        <th width="100" class="hidden-xs">强度等级</th>
+        <th width="100" class="hidden-xs">盘方量(方)</th>
+        <th width="100" class="hidden-xs">浇筑部位</th>
+        <th width="100" class="hidden-xs hidden-sm">操作员</th>
+        <th width="100">报警信息</th>
+        <?php if($user['role'] ==3 || $user['role'] ==4 || $user['role'] ==5): ?>
+        <th width="70">操作</th>
+        <?php endif; ?>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if($data): ?>
+      <?php foreach($data as $value): ?>
+        <?php 
+          if($user['role'] != 4 && $user['role'] != 5){
+            if($value['is_warn'] && (!$value['is_sup_deal'] || !$value['is_sec_deal'])){
+              $is_deal = false;
+            }else{
+              $is_deal = true;
+            }
+          }else{
+            if(($value['is_warn'] && !$value['is_sup_deal'] && $user['role'] == 4) || ($value['is_warn'] && !$value['is_sec_deal'] && $user['role'] == 5) || (($value['warn_level']==3 || $value['warn_sx_level']==3)  && !$value['is_pro_deal'] && $user['role'] == 3)){
+              $is_deal = false;
+            }else{
+              $is_deal = true;
+            }
+          }
+        ?>
+        <tr class="text-c open-iframe <?php if($value['is_warn']): ?> <?php if(!$is_deal): ?> red-line <?php else: ?> blue-line <?php endif; ?> <?php endif; ?>" data-warn="<?php echo e($value['is_warn']); ?>" data-id="<?php echo e($value['id']); ?>" id="list-<?php echo e($value['id']); ?>" data-title="拌和详细信息" data-url="<?php echo e(url('snbhz/detail_info?id='.$value['id'])); ?>">
+          <td><?php echo e($page_num++); ?></td>
+          <td><?php echo e(date('Y-m-d H:i:s', $value['time'])); ?></td>
+          <td class="hidden-xs hidden-sm"><?php echo e($value['section']['sup'][0]['name']); ?></td>
+          <td><?php echo e($value['section']['name']); ?></td>
+          <td class="hidden-xs"><?php echo e($value['scdw']); ?></td>
+          <td><?php echo e($value['sgdd']); ?></td>
+          <td class="hidden-xs"><?php echo e($value['pbbh']); ?></td>
+           <td class="hidden-xs"><?php echo e($value['pfl']); ?></td>
+          <td class="hidden-xs"><?php echo e($value['jzbw']); ?></td>
+          <td class="hidden-xs hidden-sm"><?php echo e($value['operator']); ?></td>
+          <td><?php echo e($value['warn_info']); ?></td>
+          <?php if($user['role'] ==3 || $user['role'] == 4 || $user['role'] == 5): ?>
+          <td class="f-14 product-brand-manage td-manage">
+            <?php if(!$is_deal): ?>
+            <a style="text-decoration:none" data-for='module' class="ml-5 open-iframe btn btn-secondary radius size-MINI " href="javascript:;" data-is-reload="1" data-id="<?php echo e($value['id']); ?>" data-url="<?php echo e(url('snbhz/deal/'.$value['id'].'?d_id='.$value['device_id'])); ?>" data-title="处理意见" title="处理">报警处理</a>
+            <?php endif; ?>
+          </td>
+          <?php endif; ?>
+        </tr>
+      <?php endforeach; ?>
+      <?php endif; ?>
+    </tbody>
+  </table>
+  <?php if($last_page > 1): ?>
+      <?php echo $__env->make('admin.layouts.page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php endif; ?>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script type="text/javascript" src="/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/common.js"></script> 
+<script type="text/javascript">
+list.init();
+
+$('.td-manage').on('click',function(event){
+  event.stopPropagation(); 
+});
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.iframe', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

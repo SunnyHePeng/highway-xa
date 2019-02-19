@@ -1,0 +1,349 @@
+<?php $__env->startSection('container'); ?>
+    <article class="page-container">
+        <form class="form form-horizontal" id="form_container" data-url="<?php echo e(url('stat/monitor_add')); ?>">
+            <div class="row cl">
+                <label class="form-label col-xs-3 col-sm-3"><h3 class="c-333">左洞状态：</h3></label>
+            </div>
+            <div class="row cl show-all">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>桩号：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" class="input-text" value="" placeholder="请输入桩号" id="l_stake_number" name="l_stake_number" required>
+                </div>
+            </div>
+            <div class="row cl show-all text-c">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内外观察：</label>
+                <div class="formControls col-xs-3 ">
+            <span class="select-box">
+                <select class="select dnwgc_status_l" id="l_dnwgc_status" name="l_dnwgc_status" placeholder="请选择">
+                    <option value="0">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="2">异常</option>
+                </select>
+            </span>
+                </div>
+            </div>
+            <div class="row cl dnwgc_remark_l remark">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内外观察备注(异常原因)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <textarea class="textarea" placeholder="输入异常原因" id="l_dnwgc_remark" name="l_dnwgc_remark"></textarea>
+                </div>
+            </div>
+            <div class="row cl show-all">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内收敛测量值(mm)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" class="input-text" value="" placeholder="请输入洞内收敛测量值" id="l_zbwy_measure_value" name="l_zbwy_measure_value" required>
+                </div>
+            </div>
+            <div class="row cl show-all text-c">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内收敛(警戒值5mm)：</label>
+                <div class="formControls col-xs-3 ">
+            <span class="select-box">
+                <select class="select zbwy_status_l" id="l_zbwy_status" name="l_zbwy_status" placeholder="请选择">
+                    <option value="0">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="2">超限</option>
+                </select>
+            </span>
+                </div>
+            </div>
+            <div class="row cl zbwy_remark_l remark">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内收敛备注(异常原因)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <textarea class="textarea" placeholder="输入异常原因" id="l_zbwy_remark" name="l_zbwy_remark"></textarea>
+                </div>
+            </div>
+            <div class="row cl show-all">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>拱顶下沉测量值(mm)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" class="input-text" value="" placeholder="请输入拱顶下沉测量值" id="l_gdxc_measure_value" name="l_gdxc_measure_value" required>
+                </div>
+            </div>
+            <div class="row cl show-all text-c">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>拱顶下沉(警戒值15mm)：</label>
+                <div class="formControls col-xs-3 ">
+            <span class="select-box">
+                <select class="select gdxc_status_l" id="l_gdxc_status" name="l_gdxc_status" placeholder="请选择">
+                    <option value="0">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="2">超限</option>
+                </select>
+            </span>
+                </div>
+            </div>
+            <div class="row cl gdxc_remark_l remark">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>拱顶下沉备注(异常原因)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <textarea class="textarea" placeholder="输入异常原因" id="l_gdxc_remark" name="l_gdxc_remark"></textarea>
+                </div>
+            </div>
+            <div class="row cl show-all">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>地表下沉测量值(mm)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" class="input-text" value="" placeholder="请输入地表下沉测量值" id="l_dbxc_measure_value" name="l_dbxc_measure_value" required>
+                </div>
+            </div>
+            <div class="row cl show-all text-c">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>地表下沉(警戒值15mm)：</label>
+                <div class="formControls col-xs-3 ">
+            <span class="select-box">
+                <select class="select dbxc_status_l" id="l_dbxc_status" name="l_dbxc_status" placeholder="请选择">
+                    <option value="0">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="2">超限</option>
+                </select>
+            </span>
+                </div>
+            </div>
+            <div class="row cl dbxc_remark_l remark">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>地表下沉备注(异常原因)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <textarea class="textarea" placeholder="输入异常原因" id="l_dbxc_remark" name="l_dbxc_remark"></textarea>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-3 col-sm-3"><h3 class="c-333">右洞状态：</h3></label>
+            </div>
+            <div class="row cl show-all">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>桩号：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" class="input-text" value="" placeholder="请输入桩号" id="r_stake_number" name="r_stake_number" required>
+                </div>
+            </div>
+            <div class="row cl show-all text-c">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内外观察：</label>
+                <div class="formControls col-xs-3 ">
+            <span class="select-box">
+                <select class="select dnwgc_status_r" id="r_dnwgc_status" name="r_dnwgc_status" placeholder="请选择">
+                    <option value="0">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="2">异常</option>
+                </select>
+            </span>
+                </div>
+            </div>
+            <div class="row cl dnwgc_remark_r remark">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内外观察备注(异常原因)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <textarea class="textarea" placeholder="输入异常原因" id="r_dnwgc_remark" name="r_dnwgc_remark"></textarea>
+                </div>
+            </div>
+            <div class="row cl show-all">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内收敛测量值(mm)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" class="input-text" value="" placeholder="请输入洞内收敛测量值" id="r_zbwy_measure_value" name="r_zbwy_measure_value" required>
+                </div>
+            </div>
+            <div class="row cl show-all text-c">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>洞内收敛(警戒值5mm)：</label>
+                <div class="formControls col-xs-3 ">
+            <span class="select-box">
+                <select class="select zbwy_status_r" id="r_zbwy_status" name="r_zbwy_status" placeholder="请选择">
+                    <option value="0">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="2">超限</option>
+                </select>
+            </span>
+                </div>
+            </div>
+            <div class="row cl zbwy_remark_r remark">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>周边位移备注(异常原因)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <textarea class="textarea" placeholder="输入异常原因" id="r_zbwy_remark" name="r_zbwy_remark"></textarea>
+                </div>
+            </div>
+            <div class="row cl show-all">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>拱顶下沉测量值(mm)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" class="input-text" value="" placeholder="请输入拱顶下沉测量值" id="r_gdxc_measure_value" name="r_gdxc_measure_value" required>
+                </div>
+            </div>
+            <div class="row cl show-all text-c">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>拱顶下沉(警戒值15mm)：</label>
+                <div class="formControls col-xs-3 ">
+            <span class="select-box">
+                <select class="select gdxc_status_r" id="r_gdxc_status" name="r_gdxc_status" placeholder="请选择">
+                    <option value="0">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="2">超限</option>
+                </select>
+            </span>
+                </div>
+            </div>
+            <div class="row cl gdxc_remark_r remark">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>拱顶下沉备注(异常原因)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <textarea class="textarea" placeholder="输入异常原因" id="r_gdxc_remark" name="r_gdxc_remark"></textarea>
+                </div>
+            </div>
+            <div class="row cl show-all">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>地表下沉测量值(mm)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <input type="text" class="input-text" value="" placeholder="请输入地表下沉测量值" id="r_dbxc_measure_value" name="r_dbxc_measure_value" required>
+                </div>
+            </div>
+            <div class="row cl show-all text-c">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>地表下沉(警戒值15mm)：</label>
+                <div class="formControls col-xs-3 ">
+            <span class="select-box">
+                <select class="select dbxc_status_r" id="r_dbxc_status" name="r_dbxc_status" placeholder="请选择">
+                    <option value="0">请选择</option>
+                    <option value="1">正常</option>
+                    <option value="2">超限</option>
+                </select>
+            </span>
+                </div>
+            </div>
+            <div class="row cl dbxc_remark_r remark">
+                <label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>地表下沉备注(异常原因)：</label>
+                <div class="formControls col-xs-3 col-sm-3">
+                    <textarea class="textarea" placeholder="输入异常原因" id="r_dbxc_remark" name="r_dbxc_remark"></textarea>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-3 col-sm-3"></label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <button class="btn btn-primary radius sub" type="submit">确 定</button>
+                </div>
+            </div>
+            <input type="hidden" value="<?php echo e($section['id']); ?>" id="section_id" name="section_id">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+        </form>
+    </article>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+    <script type="text/javascript" src="/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="/static/admin/js/common.js"></script>
+    <script type="text/javascript" src="/lib/plupload-2.1.9/js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/upload.js"></script>
+    <script type="text/javascript">
+        list.init();
+        $(".remark").hide();
+
+        $('.sub').on('click',function(e){
+            e.preventDefault();
+            layer.confirm('数据一旦提交之后不可更改,确定提交吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                var data=$("#form_container").serialize();
+
+//                   layer.alert(data);
+                var url=$("#form_container").attr('data-url');
+                $.post(url,data,function(data){
+                    if(data.status==0){
+                        layer.alert(data.mess);
+                    }
+                    if(data.status==1){
+                        layer.msg(data.mess, {
+                            icon: 1,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(){
+
+                            parent.parent.location.reload();
+                        });
+                    }
+                });
+            }, function(){
+
+            });
+        });
+
+        $(".dnwgc_status_l").on('change',function(){
+            if($(".dnwgc_status_l").val()==2){
+                $('.dnwgc_remark_l').show();
+            }
+            if($(".dnwgc_status_l").val()==1 || $(".dnwgc_status_l").val()==0){
+
+               $(".dnwgc_remark_l").hide();
+            }
+        });
+        $(".zbwy_status_l").on('change',function(){
+            if($(".zbwy_status_l").val()==2){
+                $('.zbwy_remark_l').show();
+            }
+            if($(".zbwy_status_l").val()==1 || $(".zbwy_status_l").val()==0){
+
+                $(".zbwy_remark_l").hide();
+            }
+        });
+        $(".gdxc_status_l").on('change',function(){
+            if($(".gdxc_status_l").val()==2){
+                $('.gdxc_remark_l').show();
+            }
+            if($(".gdxc_status_l").val()==1 || $(".gdxc_status_l").val()==0){
+
+                $(".gdxc_remark_l").hide();
+            }
+        });
+        $(".dbxc_status_l").on('change',function(){
+            if($(".dbxc_status_l").val()==2){
+                $('.dbxc_remark_l').show();
+            }
+            if($(".dbxc_status_l").val()==1 || $(".dbxc_status_l").val()==0){
+
+                $(".dbxc_remark_l").hide();
+            }
+        });
+        $(".sddbjc_status_l").on('change',function(){
+            if($(".sddbjc_status_l").val()==2){
+                $('.sddbjc_remark_l').show();
+            }
+            if($(".sddbjc_status_l").val()==1 || $(".sddbjc_status_l").val()==0){
+
+                $(".sddbjc_remark_l").hide();
+            }
+        });
+
+
+
+
+        $(".dnwgc_status_r").on('change',function(){
+            if($(".dnwgc_status_r").val()==2){
+                $('.dnwgc_remark_r').show();
+            }
+            if($(".dnwgc_status_r").val()==1 || $(".dnwgc_status_r").val()==0){
+
+                $(".dnwgc_remark_r").hide();
+            }
+        });
+        $(".zbwy_status_r").on('change',function(){
+            if($(".zbwy_status_r").val()==2){
+                $('.zbwy_remark_r').show();
+            }
+            if($(".zbwy_status_r").val()==1 || $(".zbwy_status_r").val()==0){
+
+                $(".zbwy_remark_r").hide();
+            }
+        });
+        $(".gdxc_status_r").on('change',function(){
+            if($(".gdxc_status_r").val()==2){
+                $('.gdxc_remark_r').show();
+            }
+            if($(".gdxc_status_r").val()==1 || $(".gdxc_status_r").val()==0){
+
+                $(".gdxc_remark_r").hide();
+            }
+        });
+        $(".dbxc_status_r").on('change',function(){
+            if($(".dbxc_status_r").val()==2){
+                $('.dbxc_remark_r').show();
+            }
+            if($(".dbxc_status_r").val()==1 || $(".dbxc_status_r").val()==0){
+
+                $(".dbxc_remark_r").hide();
+            }
+        });
+        $(".sddbjc_status_r").on('change',function(){
+            if($(".sddbjc_status_r").val()==2){
+                $('.sddbjc_remark_r').show();
+            }
+            if($(".sddbjc_status_r").val()==1 || $(".sddbjc_status_r").val()==0){
+
+                $(".sddbjc_remark_r").hide();
+            }
+        });
+
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.iframe', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

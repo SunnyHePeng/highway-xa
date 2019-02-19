@@ -1,0 +1,34 @@
+<table id="table_list" class="table table-border table-bordered table-bg table-sort">
+	<thead>
+		<tr class="text-c">
+			<th width="40">序号</th>
+			<th width="100" class="hidden-xs">管理单位</th>
+			<th width="100" class="hidden-xs">标段名称</th>
+			<th width="100">设备名称</th>
+			<th width="100">试验次数</th>
+			<th width="100">报警次数</th>
+			<th width="100">处理次数</th>
+			<th width="100">不合格率</th>
+			<th width="100">月份</th>
+			<th width="150">统计时间</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php if($data): ?>
+		<?php foreach($data as $value): ?>
+		<tr class="text-c">
+			<td class="hidden-xs hidden-sm"><?php echo e($page_num++); ?></td>
+			<td class="hidden-xs hidden-sm"><?php echo e($value['sup']['name']); ?></td>
+			<td><?php echo e($value['section']['name']); ?></td>
+			<td><?php echo e($value['device']['model']); ?>-<?php echo e($value['device']['category']['name']); ?></td>
+			<td><?php echo e($value['sc_num']); ?></td>
+			<td><?php echo e($value['bj_num']); ?></td>
+			<td><?php echo e($value['cl_num']); ?></td>
+			<td><?php echo e($value['bhgl']); ?>%</td>
+			<td><?php echo e($value['month']); ?></td>
+			<td><?php echo e(date('Y-m-d', $value['created_at'])); ?></td>
+		</tr>
+		<?php endforeach; ?>
+		<?php endif; ?>
+	</tbody>
+</table>

@@ -1,0 +1,31 @@
+<aside class="Hui-aside left_menu_down">
+	<div class="left-menu"><span></span>选择菜单</div>
+	<input runat="server" id="divScrollValue" type="hidden" value="" />
+	<div class="menu_dropdown bk_2">
+		<?php if($menu): ?>
+          	<?php foreach($menu as $v): ?>
+          	<dl id="menu-article">
+				<dt>
+				<?php if(isset($v['child']) && !empty($v['child'])): ?>
+				<i class="Hui-iconfont"><?php if(isset($v['icon']) && !empty($v['icon'])): ?><?php echo e($v['icon']); ?><?php endif; ?></i> <?php echo e($v['name']); ?>
+
+				<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+				<dd <?php if($active && $active['pid'] == $v['id']): ?>style="display:block"<?php endif; ?>>
+					<ul>
+						<?php foreach($v['child'] as $ck=>$cv): ?>
+						<li <?php if($active && $active['url'] == $cv['url']): ?>class="current"<?php endif; ?>><a href="<?php echo e(url($cv['url'])); ?>" title="<?php echo e($cv['name']); ?>"><?php echo e($cv['name']); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</dd>
+				<?php else: ?>
+				<a href="<?php echo e(url($v['url'])); ?>" <?php if($active && $active['url'] == $v['url']): ?>class="current"<?php endif; ?>><i class="Hui-iconfont"><?php echo e($v['icon']); ?></i> <?php echo e($v['name']); ?></a>
+				</dt>
+				<?php endif; ?>
+			</dl>
+          	<?php endforeach; ?>
+      	<?php else: ?>
+        	获取菜单出错
+      	<?php endif; ?>
+	</div>
+</aside>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

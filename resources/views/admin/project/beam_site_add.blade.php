@@ -1,0 +1,94 @@
+<article class="page-container" id="layer-edit">
+	<form class="form form-horizontal" id="form_container" data-url="{{url('manage/beam_site_add')}}">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>项目公司：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" style="width:150px;">
+					<select class="select" name="project_id" id="project_id" placeholder="请选择项目公司" data-url="{{url('manage/get_sup_by_pro')}}">
+						<option value="0">请选择项目公司</option>
+                        @if($project_data)
+						 @foreach($project_data as $v)
+								<option value="{{$v['id']}}">{{$v['name']}}</option>
+						 @endforeach
+						@endif
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>监理：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" style="width:150px;">
+					<select class="select" name="supervision_id" id="supervision_id" placeholder="请选择监理" data-url="{{url('manage/get_sec_by_sup')}}">
+						<option value="">请选择</option>
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>合同段：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box" style="width:150px;">
+					<select class="select" name="section_id" id="section_id" placeholder="请选择监理">
+						<option value="">请选择</option>
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>梁场名称：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text msg_must" value="" placeholder="请输入梁场名称" id="name" name="name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>面积(㎡)：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text msg_must" value="" placeholder="请输入面积" id="area" name="area">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>台座数量：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="number" class="input-text msg_must" value="" placeholder="请输入台座数量" id="pedestal_number" name="pedestal_number">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>喷淋控制设备数量：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="number" class="input-text msg_must" value="" placeholder="请输入喷淋控制设备数量" id="device_number" name="device_number">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>喷淋设备类型：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text msg_must" value="" placeholder="请输入喷淋设备类型" id="device_type" name="device_type">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>负责人：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text msg_must" value="" placeholder="请输入负责人" id="fzr" name="fzr">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>联系方式：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text msg_must" value="" placeholder="请输入负责人联系方式" id="phone" name="phone">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>预制梁类型：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text msg_must" value="" placeholder="请输入预制梁类型" id="beam_type" name="beam_type">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>预制梁数量：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text msg_must" value="" placeholder="请输入预制梁数量" id="beam_number" name="beam_number">
+			</div>
+		</div>
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	</form>
+</article>

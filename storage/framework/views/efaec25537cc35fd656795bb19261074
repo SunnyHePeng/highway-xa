@@ -1,0 +1,40 @@
+<div class="cl mt-10">
+	<span class="l">
+		<a class="btn btn-primary radius add-a" data-for="project" data-title="添加总量信息" href="javascript:;" data-url="<?php echo e(url('stat/sd_set_add')); ?>"><i class="Hui-iconfont">&#xe600;</i>添加总量信息</a>
+	</span>
+</div>
+
+<div class="mt-10 dataTables_wrapper">
+    <table id="table_list" class="table table-border table-bordered table-bg table-sort">
+        <thead>
+        <tr class="text-c">
+            <th width="40" class="hidden-xs hidden-sm">序号</th>
+            <th width="80" class="hidden-xs hidden-sm hidden-md">标段</th>
+            <th width="80">位置</th>
+            <th width="80">项目</th>
+            <th width="80">总量</th>
+        </tr>
+        </thead>
+        <tbody>
+         <?php if($total): ?>
+             <?php foreach($total as $k=>$v): ?>
+          <tr class="text-c">
+             <td><?php echo e($k+1); ?></td>
+             <td><?php echo e($v['section']['name']); ?></td>
+             <td>
+                 <?php if($v['site']==1): ?>
+                     左洞
+                 <?php elseif($v['site']==2): ?>
+                     右洞
+                 <?php elseif($v['site']==0): ?>
+                     土方开挖
+                 <?php endif; ?>
+             </td>
+              <td><?php echo e($v['type_name']); ?></td>
+             <td><?php echo e($v['zl']); ?></td>
+          </tr>
+             <?php endforeach; ?>
+         <?php endif; ?>
+        </tbody>
+    </table>
+</div>
